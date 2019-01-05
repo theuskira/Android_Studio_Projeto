@@ -50,31 +50,51 @@ public class CalculoIMCSimplesActivity extends AppCompatActivity {
         this.mViewHolder.calcular.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if(mViewHolder.altura.getText().toString().equals("")){
                     mViewHolder.altura.setError("Digite a Altura!");
                     mViewHolder.imagem.setVisibility(View.VISIBLE);
                     mViewHolder.imagem.setImageResource(R.drawable.invalido);
                     mViewHolder.infoIMC.setText("Valor Inválido!");
-                    mViewHolder.infoPeso.setText("");
+                    mViewHolder.infoPeso.setVisibility(View.GONE);
+                }
+                else if(Float.parseFloat(mViewHolder.altura.getText().toString()) > 4 || Float.parseFloat(mViewHolder.altura.getText().toString()) < 0){
+                    mViewHolder.altura.setError("Altura Inválida!");
+                    mViewHolder.imagem.setVisibility(View.VISIBLE);
+                    mViewHolder.imagem.setImageResource(R.drawable.invalido);
+                    mViewHolder.infoIMC.setText("Valor Inválido!");
+                    mViewHolder.infoPeso.setVisibility(View.GONE);
                 }
                 if(mViewHolder.peso.getText().toString().equals("")){
                     mViewHolder.peso.setError("Digite o Peso!");
                     mViewHolder.imagem.setVisibility(View.VISIBLE);
                     mViewHolder.imagem.setImageResource(R.drawable.invalido);
                     mViewHolder.infoIMC.setText("Valor Inválido!");
-                    mViewHolder.infoPeso.setText("");
+                    mViewHolder.infoPeso.setVisibility(View.GONE);
+                }
+                else if(Float.parseFloat(mViewHolder.peso.getText().toString()) > 600 || Float.parseFloat(mViewHolder.peso.getText().toString()) < 0){
+                    mViewHolder.peso.setError("Peso Inválido!");
+                    mViewHolder.imagem.setVisibility(View.VISIBLE);
+                    mViewHolder.imagem.setImageResource(R.drawable.invalido);
+                    mViewHolder.infoIMC.setText("Valor Inválido!");
+                    mViewHolder.infoPeso.setVisibility(View.GONE);
                 }
                 else{
                     imc = (Float.parseFloat(mViewHolder.peso.getText().toString()) / (Float.parseFloat(mViewHolder.altura.getText().toString()) * Float.parseFloat(mViewHolder.altura.getText().toString())));
                     mViewHolder.infoIMC.setText("IMC = " + df.format(imc) + " " + calculoIMC(imc));
                     AlterarImagem(imc);
-                    mViewHolder.infoPeso.setText(calculoPesoIdeal(Float.parseFloat(mViewHolder.altura.getText().toString()), mViewHolder.radioButtonHomem, mViewHolder.radioButtonMulher));
+                    if(calculoPesoIdeal(Float.parseFloat(mViewHolder.altura.getText().toString()), mViewHolder.radioButtonHomem, mViewHolder.radioButtonMulher).equals("")){
+                        mViewHolder.infoPeso.setVisibility(View.GONE);
+                    }else{
+                        mViewHolder.infoPeso.setText(calculoPesoIdeal(Float.parseFloat(mViewHolder.altura.getText().toString()), mViewHolder.radioButtonHomem, mViewHolder.radioButtonMulher));
+                        mViewHolder.infoPeso.setVisibility(View.VISIBLE);
+                    }
                 }
             }
         });
 
         //Verifica se a posição da tela é landscape (deitado) se não,
-        // //só pode estar em portrait (em pé)!
+        // só pode estar em portrait (em pé)!
         Configuration configuration = getResources().getConfiguration();
 
         if (configuration.orientation == Configuration.ORIENTATION_LANDSCAPE){
