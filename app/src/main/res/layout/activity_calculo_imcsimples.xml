@@ -2,11 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayoutSimples"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_weight="0"
     android:background="@color/colorPrimaryDark"
     android:orientation="vertical"
+    android:scrollbars="vertical"
     tools:context=".CalculoIMCSimplesActivity">
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -15,34 +19,38 @@
         android:layout_marginTop="16dp"
         android:layout_marginRight="16dp"
         android:layout_weight="0"
-        android:text="Altura"
+        android:scrollbars="vertical"
+        android:text="@string/altura"
         android:textColor="@android:color/background_light"
         android:textSize="18sp"
         android:textStyle="bold" />
 
     <LinearLayout
+        android:id="@+id/linearLayoutSimplesAltura"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:scrollbars="vertical">
 
         <EditText
             android:id="@+id/editTextAltura"
-            android:layout_width="300dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:hint="1.60"
+            android:layout_weight="1"
+            android:hint="@string/_1_60"
             android:inputType="numberDecimal"
+            android:maxLength="4"
             android:textColor="@android:color/background_light" />
 
         <TextView
-            android:layout_width="46dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="16dp"
-            android:layout_weight="1"
-            android:text="m" />
+            android:layout_weight="0"
+            android:text="@string/m" />
 
     </LinearLayout>
 
@@ -53,34 +61,37 @@
         android:layout_marginTop="16dp"
         android:layout_marginRight="16dp"
         android:layout_weight="0"
-        android:text="Peso"
+        android:text="@string/peso"
         android:textColor="@android:color/background_light"
         android:textSize="18sp"
         android:textStyle="bold" />
 
     <LinearLayout
+        android:id="@+id/linearLayoutSimplesPeso"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:scrollbars="vertical">
 
         <EditText
             android:id="@+id/editTextPeso"
-            android:layout_width="300dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:hint="62.5"
+            android:layout_weight="1"
+            android:hint="@string/_62_5"
             android:inputType="numberDecimal"
+            android:maxLength="6"
             android:textColor="@android:color/background_light" />
 
         <TextView
-            android:layout_width="46dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="16dp"
-            android:layout_weight="1"
-            android:text="Kg" />
+            android:layout_weight="0"
+            android:text="@string/kg" />
 
     </LinearLayout>
 
@@ -90,12 +101,14 @@
         android:layout_marginTop="16dp"
         android:layout_weight="0"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:scrollbars="vertical">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:scrollbars="vertical">
 
             <RadioGroup
                 android:layout_width="wrap_content"
@@ -108,7 +121,7 @@
                     android:id="@+id/radioButtonMasculino"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Homem"
+                    android:text="@string/homem"
                     android:textColor="@android:color/background_light"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -117,7 +130,7 @@
                     android:id="@+id/radioButtonFeminino"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Mulher"
+                    android:text="@string/mulher"
                     android:textColor="@android:color/background_light"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -127,7 +140,8 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:scrollbars="vertical">
 
             <Button
                 android:id="@+id/btnCalcular"
@@ -135,8 +149,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
+                android:layout_weight="0"
                 android:background="@color/colorPrimary"
-                android:text="Calcular"
+                android:text="@string/calcular"
                 android:textColor="@android:color/background_light"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -173,12 +188,11 @@
         android:id="@+id/imagemIMC"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center"
+        android:layout_gravity="center_horizontal"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
         android:layout_weight="1"
         app:srcCompat="@drawable/lol" />
-
 </LinearLayout>

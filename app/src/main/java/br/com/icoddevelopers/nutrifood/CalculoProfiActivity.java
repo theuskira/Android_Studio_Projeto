@@ -1,12 +1,15 @@
 package br.com.icoddevelopers.nutrifood;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 
 public class CalculoProfiActivity extends AppCompatActivity {
@@ -27,6 +30,23 @@ public class CalculoProfiActivity extends AppCompatActivity {
         this.mViewHolder.idade = (EditText) findViewById(R.id.editTextProfIdade);
         this.mViewHolder.radioButtonHomem = findViewById(R.id.radioButtonProfMasculino);
         this.mViewHolder.radioButtonMulher = findViewById(R.id.radioButtonProfFeminino);
+        this.mViewHolder.linearLayoutProf = (LinearLayout) findViewById(R.id.linearLayoutProf);
+        this.mViewHolder.linearLayoutProfAltura = (LinearLayout) findViewById(R.id.linearLayoutProfAltura);
+        this.mViewHolder.linearLayoutProfPeso = (LinearLayout) findViewById(R.id.linearLayoutProfPeso);
+        this.mViewHolder.linearLayoutProfIdade = (LinearLayout) findViewById(R.id.linearLayoutProfIdade);
+
+
+        //Verifica se a posição da tela é landscape (deitado) se não,
+        // só pode estar em portrait (em pé)!
+        Configuration configuration = getResources().getConfiguration();
+
+        if (configuration.orientation == Configuration.ORIENTATION_LANDSCAPE){
+            this.mViewHolder.linearLayoutProf.setGravity(Gravity.CENTER_HORIZONTAL);
+            this.mViewHolder.linearLayoutProfAltura.setGravity(Gravity.CENTER_HORIZONTAL);
+            this.mViewHolder.linearLayoutProfPeso.setGravity(Gravity.CENTER_HORIZONTAL);
+            this.mViewHolder.linearLayoutProfIdade.setGravity(Gravity.CENTER_HORIZONTAL);
+        }else{
+        }
     }
 
     @Override
@@ -77,13 +97,17 @@ public class CalculoProfiActivity extends AppCompatActivity {
         EditText idade;
         RadioButton radioButtonHomem;
         RadioButton radioButtonMulher;
+        LinearLayout linearLayoutProf;
+        LinearLayout linearLayoutProfAltura;
+        LinearLayout linearLayoutProfPeso;
+        LinearLayout linearLayoutProfIdade;
     }
 
     private String verificarValores(RadioButton homem, RadioButton mulher){
         if(homem.isChecked()){
-            return "Homem";
+            return "Masculino";
         }else if(mulher.isChecked()){
-            return "Mulher";
+            return "Feminino";
         }else {
             return "Indefinido";
         }

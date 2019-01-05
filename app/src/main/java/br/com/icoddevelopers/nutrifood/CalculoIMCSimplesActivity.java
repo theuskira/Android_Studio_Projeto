@@ -50,6 +50,7 @@ public class CalculoIMCSimplesActivity extends AppCompatActivity {
         this.mViewHolder.calcular.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                boolean erro = false;
 
                 if(mViewHolder.altura.getText().toString().equals("")){
                     mViewHolder.altura.setError("Digite a Altura!");
@@ -57,13 +58,16 @@ public class CalculoIMCSimplesActivity extends AppCompatActivity {
                     mViewHolder.imagem.setImageResource(R.drawable.invalido);
                     mViewHolder.infoIMC.setText("Valor Inválido!");
                     mViewHolder.infoPeso.setVisibility(View.GONE);
+                    erro = true;
+
                 }
-                else if(Float.parseFloat(mViewHolder.altura.getText().toString()) > 4 || Float.parseFloat(mViewHolder.altura.getText().toString()) < 0){
+                if(Float.parseFloat(mViewHolder.altura.getText().toString()) > 4 || Float.parseFloat(mViewHolder.altura.getText().toString()) < 0){
                     mViewHolder.altura.setError("Altura Inválida!");
                     mViewHolder.imagem.setVisibility(View.VISIBLE);
                     mViewHolder.imagem.setImageResource(R.drawable.invalido);
                     mViewHolder.infoIMC.setText("Valor Inválido!");
                     mViewHolder.infoPeso.setVisibility(View.GONE);
+                    erro = true;
                 }
                 if(mViewHolder.peso.getText().toString().equals("")){
                     mViewHolder.peso.setError("Digite o Peso!");
@@ -71,15 +75,17 @@ public class CalculoIMCSimplesActivity extends AppCompatActivity {
                     mViewHolder.imagem.setImageResource(R.drawable.invalido);
                     mViewHolder.infoIMC.setText("Valor Inválido!");
                     mViewHolder.infoPeso.setVisibility(View.GONE);
+                    erro = true;
                 }
-                else if(Float.parseFloat(mViewHolder.peso.getText().toString()) > 600 || Float.parseFloat(mViewHolder.peso.getText().toString()) < 0){
+                if(Float.parseFloat(mViewHolder.peso.getText().toString()) > 600 || Float.parseFloat(mViewHolder.peso.getText().toString()) < 0){
                     mViewHolder.peso.setError("Peso Inválido!");
                     mViewHolder.imagem.setVisibility(View.VISIBLE);
                     mViewHolder.imagem.setImageResource(R.drawable.invalido);
                     mViewHolder.infoIMC.setText("Valor Inválido!");
                     mViewHolder.infoPeso.setVisibility(View.GONE);
+                    erro = true;
                 }
-                else{
+                if(!erro){
                     imc = (Float.parseFloat(mViewHolder.peso.getText().toString()) / (Float.parseFloat(mViewHolder.altura.getText().toString()) * Float.parseFloat(mViewHolder.altura.getText().toString())));
                     mViewHolder.infoIMC.setText("IMC = " + df.format(imc) + " " + calculoIMC(imc));
                     AlterarImagem(imc);

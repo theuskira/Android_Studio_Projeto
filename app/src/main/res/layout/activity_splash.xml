@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark"
     android:orientation="vertical"
+    android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
     tools:context=".SplashActivity">
 
     <ImageView

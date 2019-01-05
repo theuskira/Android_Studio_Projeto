@@ -135,10 +135,10 @@ public class DadosVerificadosProfActivity extends AppCompatActivity {
     }
 
     private double pesoIdeal(String sexo, float altura){
-        if(sexo.equals("Homem")){
+        if(sexo.equals("Masculino")){
             return 22 * (altura * altura);
         }
-        else if(sexo.equals("Mulher")){
+        else if(sexo.equals("Feminino")){
             return 20.8 * (altura * altura);
         }
         else{
