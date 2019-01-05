@@ -1,15 +1,20 @@
 package br.com.icoddevelopers.nutrifood;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Layout;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.DecimalFormat;
 
@@ -31,6 +36,9 @@ public class CalculoIMCSimplesActivity extends AppCompatActivity {
 
         this.mViewHolder.altura = (EditText) findViewById(R.id.editTextAltura);
         this.mViewHolder.peso = (EditText) findViewById(R.id.editTextPeso);
+        this.mViewHolder.linearLayoutSimples = (LinearLayout) findViewById(R.id.linearLayoutSimples);
+        this.mViewHolder.linearLayoutSimplesAltura = (LinearLayout) findViewById(R.id.linearLayoutSimplesAltura);
+        this.mViewHolder.linearLayoutSimplesPeso = (LinearLayout) findViewById(R.id.linearLayoutSimplesPeso);
         this.mViewHolder.calcular = (Button) findViewById(R.id.btnCalcular);
         this.mViewHolder.infoIMC = (TextView) findViewById(R.id.textoInformacaoIMC);
         this.mViewHolder.infoPeso = (TextView) findViewById(R.id.textoInformacaoPesoIdeal);
@@ -65,12 +73,27 @@ public class CalculoIMCSimplesActivity extends AppCompatActivity {
             }
         });
 
+        //Verifica se a posição da tela é landscape (deitado) se não,
+        // //só pode estar em portrait (em pé)!
+        Configuration configuration = getResources().getConfiguration();
 
+        if (configuration.orientation == Configuration.ORIENTATION_LANDSCAPE){
+            this.mViewHolder.linearLayoutSimples.setGravity(Gravity.CENTER_HORIZONTAL);
+            this.mViewHolder.linearLayoutSimplesAltura.setGravity(Gravity.CENTER_HORIZONTAL);
+            this.mViewHolder.linearLayoutSimplesPeso.setGravity(Gravity.CENTER_HORIZONTAL);
+        }else{
+            this.mViewHolder.linearLayoutSimples.setGravity(Gravity.NO_GRAVITY);
+            this.mViewHolder.linearLayoutSimplesAltura.setGravity(Gravity.NO_GRAVITY);
+            this.mViewHolder.linearLayoutSimplesPeso.setGravity(Gravity.NO_GRAVITY);
+        }
     }
 
     private static class ViewHolder{
         EditText altura;
         EditText peso;
+        LinearLayout linearLayoutSimples;
+        LinearLayout linearLayoutSimplesAltura;
+        LinearLayout linearLayoutSimplesPeso;
         Button calcular;
         TextView infoIMC;
         TextView infoPeso;
