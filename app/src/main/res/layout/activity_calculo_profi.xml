@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayoutProf"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_weight="0"
@@ -16,12 +17,13 @@
         android:layout_marginTop="16dp"
         android:layout_marginRight="16dp"
         android:layout_weight="0"
-        android:text="Altura"
+        android:text="@string/altura"
         android:textColor="@android:color/background_light"
         android:textSize="18sp"
         android:textStyle="bold" />
 
     <LinearLayout
+        android:id="@+id/linearLayoutProfAltura"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0"
@@ -34,16 +36,19 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:hint="1.60"
+            android:layout_weight="1"
+            android:autofillHints=""
+            android:hint="@string/_1_60"
             android:inputType="numberDecimal"
+            android:maxLength="4"
             android:textColor="@android:color/background_light" />
 
         <TextView
-            android:layout_width="46dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="16dp"
-            android:layout_weight="1"
-            android:text="m" />
+            android:layout_weight="0"
+            android:text="@string/m" />
 
     </LinearLayout>
 
@@ -54,12 +59,13 @@
         android:layout_marginTop="16dp"
         android:layout_marginRight="16dp"
         android:layout_weight="0"
-        android:text="Peso"
+        android:text="@string/peso"
         android:textColor="@android:color/background_light"
         android:textSize="18sp"
         android:textStyle="bold" />
 
     <LinearLayout
+        android:id="@+id/linearLayoutProfPeso"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0"
@@ -72,32 +78,35 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:hint="62.5"
+            android:layout_weight="1"
+            android:hint="@string/_62_5"
             android:inputType="numberDecimal"
+            android:maxLength="6"
             android:textColor="@android:color/background_light" />
 
         <TextView
-            android:layout_width="46dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="16dp"
-            android:layout_weight="1"
-            android:text="Kg" />
+            android:layout_weight="0"
+            android:text="@string/kg" />
 
     </LinearLayout>
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginRight="16dp"
         android:layout_weight="0"
-        android:text="Idade"
+        android:text="@string/idade"
         android:textColor="@android:color/background_light"
         android:textSize="18sp"
         android:textStyle="bold" />
 
     <LinearLayout
+        android:id="@+id/linearLayoutProfIdade"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0"
@@ -110,16 +119,18 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:hint="18"
-            android:inputType="numberDecimal"
+            android:layout_weight="1"
+            android:hint="@string/_18"
+            android:inputType="numberSigned"
+            android:maxLength="3"
             android:textColor="@android:color/background_light" />
 
         <TextView
-            android:layout_width="46dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="16dp"
-            android:layout_weight="1"
-            android:text="Anos" />
+            android:layout_weight="0"
+            android:text="@string/anos" />
 
     </LinearLayout>
 
@@ -147,7 +158,7 @@
                     android:id="@+id/radioButtonProfMasculino"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Homem"
+                    android:text="@string/homem"
                     android:textColor="@android:color/background_light"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -156,7 +167,7 @@
                     android:id="@+id/radioButtonProfFeminino"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Mulher"
+                    android:text="@string/mulher"
                     android:textColor="@android:color/background_light"
                     android:textSize="18sp"
                     android:textStyle="bold" />
