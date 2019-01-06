@@ -141,6 +141,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/homem"
+                            android:textAllCaps="false"
                             android:textColor="@android:color/background_light"
                             android:textSize="18sp"
                             android:textStyle="bold" />
@@ -150,6 +151,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/mulher"
+                            android:textAllCaps="false"
                             android:textColor="@android:color/background_light"
                             android:textSize="18sp"
                             android:textStyle="bold" />
@@ -171,6 +173,7 @@
                         android:layout_weight="0"
                         android:background="@color/colorPrimary"
                         android:text="@string/calcular"
+                        android:textAllCaps="true"
                         android:textColor="@android:color/background_light"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -186,7 +189,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_weight="0"
-                android:hint="IMC"
+                android:hint="@string/imc_classifica_o"
                 android:textColor="@android:color/background_light"
                 android:textSize="18sp"
                 android:textStyle="bold"
@@ -201,7 +204,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_weight="0"
-                android:hint="IMC"
+                android:hint="@string/peso_ideal"
                 android:textColor="@android:color/background_light"
                 android:textSize="18sp"
                 android:textStyle="bold"
@@ -217,7 +220,7 @@
                 android:layout_marginRight="16dp"
                 android:layout_marginBottom="16dp"
                 android:layout_weight="1"
-                android:visibility="visible"
+                android:visibility="gone"
                 app:srcCompat="@drawable/lol" />
 
 

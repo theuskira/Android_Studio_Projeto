@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
 public class CalculoProfiActivity extends AppCompatActivity {
 
@@ -60,27 +61,47 @@ public class CalculoProfiActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.btnMenuVerificar:
-                if(mViewHolder.altura.getText().toString().equals("")){
-                    mViewHolder.altura.setError("Digite a Altura!");
-                }
-                if(mViewHolder.peso.getText().toString().equals("")){
-                    mViewHolder.peso.setError("Digite o Peso!");
-                }
-                if(mViewHolder.idade.getText().toString().equals("")){
-                    mViewHolder.idade.setError("Digite a Idade!");
-                }
-                else{
-                    Intent intent = new Intent(CalculoProfiActivity.this, DadosVerificadosProfActivity.class);
-                    Bundle bundle = new Bundle();
+                try{
+                    boolean erro = false;
+                    if(mViewHolder.altura.getText().toString().equals("")){
+                        mViewHolder.altura.setError("Digite a Altura!");
+                        erro = true;
+                    }
+                    else if(Float.parseFloat(mViewHolder.altura.getText().toString()) > 4 || Float.parseFloat(mViewHolder.altura.getText().toString()) < 0){
+                        mViewHolder.altura.setError("Altura Inválida!");
+                        erro = true;
+                    }
+                    if(mViewHolder.peso.getText().toString().equals("")){
+                        mViewHolder.peso.setError("Digite o Peso!");
+                        erro = true;
+                    }
+                    else if(Float.parseFloat(mViewHolder.peso.getText().toString()) > 600 || Float.parseFloat(mViewHolder.peso.getText().toString()) < 0){
+                        mViewHolder.peso.setError("Peso Inválido!");
+                        erro = true;
+                    }
+                    if(mViewHolder.idade.getText().toString().equals("")){
+                        mViewHolder.idade.setError("Digite a Idade!");
+                        erro = true;
+                    }
+                    else if(Float.parseFloat(mViewHolder.idade.getText().toString()) > 150 || Float.parseFloat(mViewHolder.idade.getText().toString()) < 0){
+                        mViewHolder.idade.setError("Idade Inválida!");
+                        erro = true;
+                    }
+                    if(!erro){
+                        Intent intent = new Intent(CalculoProfiActivity.this, DadosVerificadosProfActivity.class);
+                        Bundle bundle = new Bundle();
 
-                    bundle.putString("idade", mViewHolder.idade.getText().toString());
-                    bundle.putString("altura", mViewHolder.altura.getText().toString());
-                    bundle.putString("peso", mViewHolder.peso.getText().toString());
-                    bundle.putString("sexo", verificarValores(mViewHolder.radioButtonHomem, mViewHolder.radioButtonMulher));
-                    intent.putExtras(bundle);
-                    startActivity(intent);
+                        bundle.putString("idade", mViewHolder.idade.getText().toString());
+                        bundle.putString("altura", mViewHolder.altura.getText().toString());
+                        bundle.putString("peso", mViewHolder.peso.getText().toString());
+                        bundle.putString("sexo", verificarValores(mViewHolder.radioButtonHomem, mViewHolder.radioButtonMulher));
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                    }
+                    break;
+                }catch (Exception e){
+                    Toast.makeText(getApplicationContext(), "Erro: " + e, Toast.LENGTH_LONG).show();
                 }
-                break;
             case android.R.id.home:  //ID do seu botão (gerado automaticamente pelo android, usando como está, deve funcionar
                 startActivity(new Intent(this, MainActivity.class));  //O efeito ao ser pressionado do botão (no caso abre a activity)
                 finish();  //Método para matar a activity e não deixa-lá indexada na pilhagem

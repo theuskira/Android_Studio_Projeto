@@ -19,4 +19,12 @@
     <string name="idade">Idade</string>
     <string name="_18">18</string>
     <string name="anos">Anos</string>
+    <string name="peso_ideal">Peso Ideal</string>
+    <string name="imc_classifica_o"><![CDATA[IMC & Classificação]]></string>
+    <string name="resultado">Resultado</string>
+    <string name="informa_es">Informações</string>
+    <string name="peso_atual">Peso Atual:</string>
+    <string name="sexo">Sexo:</string>
+    <string name="indefinido">Indefinido</string>
+    <string name="faixa_etaria">Faixa Etaria</string>
 </resources>

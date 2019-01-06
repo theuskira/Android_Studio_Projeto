@@ -45,10 +45,14 @@ public class DadosVerificadosProfActivity extends AppCompatActivity {
         this.mViewHolder.peso_ideal = (TextView) findViewById(R.id.dadosVerificadosIdeal);
         this.mViewHolder.peso_ajustado = (TextView) findViewById(R.id.dadosVerificadosAjustado);
         this.mViewHolder.sexo = (TextView) findViewById(R.id.dadosVerificadosSexo);
+        this.mViewHolder.alturaAtual = (TextView) findViewById(R.id.dadosVerificadosAltura);
+        this.mViewHolder.pesoAtual = (TextView) findViewById(R.id.dadosVerificadosPesoAtual);
 
         this.mViewHolder.imc.setText(df.format(peso/(altura*altura)));
         this.mViewHolder.classificacao.setText(calculoIMC(peso/(altura*altura)));
         this.mViewHolder.faixa_etaria.setText(faixaEtaria(idade));
+        this.mViewHolder.alturaAtual.setText("" + altura);
+        this.mViewHolder.pesoAtual.setText("" + peso);
         this.mViewHolder.idade.setText("" + idade);
         this.mViewHolder.sexo.setText(sexo);
         this.mViewHolder.necessidade_hidrica.setText("" + df.format(calculoHidrico(peso, idade) * 0.001));
@@ -65,6 +69,8 @@ public class DadosVerificadosProfActivity extends AppCompatActivity {
         TextView peso_ideal;
         TextView peso_ajustado;
         TextView sexo;
+        TextView alturaAtual;
+        TextView pesoAtual;
     }
 
 
