@@ -13,25 +13,25 @@
             android:icon="@drawable/calculator"
             android:title="Cálculo Avançado" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
+            android:id="@+id/nav_alarme"
+            android:icon="@drawable/relogio"
+            android:title="@string/alarmes" />
         <item
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:title="Editar" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="@string/conta">
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:id="@+id/nav_entrar"
+                android:icon="@android:drawable/ic_input_add"
+                android:title="@string/entrar" />
             <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:id="@+id/nav_perfil"
+                android:icon="@drawable/profile"
+                android:title="Informações" />
         </menu>
     </item>
 
