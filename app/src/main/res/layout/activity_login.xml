@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -42,7 +43,9 @@
                     android:hint="@string/prompt_email"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:textColor="@android:color/white"
+                    android:textColorHint="@color/colorPrimary" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -60,7 +63,9 @@
                     android:imeOptions="actionUnspecified"
                     android:inputType="textPassword"
                     android:maxLines="1"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:textColor="@android:color/white"
+                    android:textColorHint="@color/colorPrimary" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -70,8 +75,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:layout_weight="0"
+                android:background="@color/colorPrimary"
                 android:text="Entrar ou Cadastrar"
                 android:textAllCaps="false"
+                android:textColor="@android:color/white"
                 android:textStyle="bold" />
 
         </LinearLayout>

@@ -173,8 +173,9 @@
                         android:layout_weight="0"
                         android:background="@color/colorPrimary"
                         android:text="@string/calcular"
-                        android:textAllCaps="true"
-                        android:textColor="@android:color/background_light"
+                        android:textAllCaps="false"
+                        android:textColor="@android:color/white"
+                        android:textSize="18sp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
