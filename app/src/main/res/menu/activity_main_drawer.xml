@@ -13,6 +13,10 @@
             android:icon="@drawable/calculator"
             android:title="Cálculo Avançado" />
         <item
+            android:id="@+id/nav_orientacao"
+            android:icon="@drawable/ingredients"
+            android:title="Orientação Nutricional" />
+        <item
             android:id="@+id/nav_alarme"
             android:icon="@drawable/relogio"
             android:title="@string/alarmes" />
@@ -22,7 +26,8 @@
             android:title="Editar" />
     </group>
 
-    <item android:title="@string/conta">
+    <item android:title="@string/conta"
+        android:visible="true">
         <menu>
             <item
                 android:id="@+id/nav_entrar"

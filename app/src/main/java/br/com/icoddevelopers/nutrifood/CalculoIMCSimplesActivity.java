@@ -60,6 +60,10 @@ public class CalculoIMCSimplesActivity extends AppCompatActivity {
                 try{
                     boolean erro = false;
 
+                    if(Float.parseFloat(mViewHolder.altura.getText().toString()) > 100){
+                        mViewHolder.altura.setText("" + Float.parseFloat(mViewHolder.altura.getText().toString())  * 0.01);
+                    }
+
                     if(mViewHolder.altura.getText().toString().equals("")){
                         mViewHolder.altura.setError("Digite a Altura!");
                         mViewHolder.imagem.setVisibility(View.VISIBLE);
