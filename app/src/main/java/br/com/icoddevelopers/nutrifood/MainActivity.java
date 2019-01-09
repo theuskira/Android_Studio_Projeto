@@ -86,17 +86,27 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_camera) {
             Intent intent = new Intent(MainActivity.this, CalculoIMCSimplesActivity.class);
             startActivity(intent);
-        } else if (id == R.id.nav_gallery) {
+        }
+        else if (id == R.id.nav_profi) {
             Intent intent = new Intent(MainActivity.this, CalculoProfiActivity.class);
             startActivity(intent);
-        } else if (id == R.id.nav_alarme) {
+        }
+        else if (id == R.id.nav_orientacao) {
+            //Intent intent = new Intent(MainActivity.this, CalculoProfiActivity.class);
+            //startActivity(intent);
+            Toast.makeText(MainActivity.this, "Orientação Nutricional", Toast.LENGTH_LONG).show();
+        }
+        else if (id == R.id.nav_alarme) {
             Toast.makeText(MainActivity.this, "Alarmes", Toast.LENGTH_LONG).show();
-        } else if (id == R.id.nav_manage) {
+        }
+        else if (id == R.id.nav_manage) {
 
-        } else if (id == R.id.nav_entrar) {
+        }
+        else if (id == R.id.nav_entrar) {
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(intent);
-        } else if (id == R.id.nav_perfil) {
+        }
+        else if (id == R.id.nav_perfil) {
             Intent intent = new Intent(MainActivity.this, ContaActivity.class);
             startActivity(intent);
         }

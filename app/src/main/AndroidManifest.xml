@@ -33,7 +33,8 @@
         <activity android:name=".ContaActivity" />
         <activity
             android:name=".LoginActivity"
-            android:label="@string/title_activity_login"></activity>
+            android:label="@string/title_activity_login" />
+        <activity android:name=".OrientacaoActivity"></activity>
     </application>
 
 </manifest>

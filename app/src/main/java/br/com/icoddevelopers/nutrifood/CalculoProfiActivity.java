@@ -64,7 +64,7 @@ public class CalculoProfiActivity extends AppCompatActivity {
                 try{
                     boolean erro = false;
 
-                    if(Float.parseFloat(mViewHolder.altura.getText().toString()) > 100){
+                    if(Float.parseFloat(mViewHolder.altura.getText().toString()) >= 50){
                         mViewHolder.altura.setText("" + Float.parseFloat(mViewHolder.altura.getText().toString())  * 0.01);
                     }
 
