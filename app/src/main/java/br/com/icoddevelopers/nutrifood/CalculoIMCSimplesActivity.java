@@ -60,9 +60,7 @@ public class CalculoIMCSimplesActivity extends AppCompatActivity {
                 try{
                     boolean erro = false;
 
-                    if(Float.parseFloat(mViewHolder.altura.getText().toString()) >= 50){
-                        mViewHolder.altura.setText("" + Float.parseFloat(mViewHolder.altura.getText().toString())  * 0.01);
-                    }
+
 
                     if(mViewHolder.altura.getText().toString().equals("")){
                         mViewHolder.altura.setError("Digite a Altura!");
@@ -71,6 +69,9 @@ public class CalculoIMCSimplesActivity extends AppCompatActivity {
                         mViewHolder.infoPeso.setVisibility(View.GONE);
                         mViewHolder.infoIMC.setVisibility(View.GONE);
                         erro = true;
+                    }
+                    else if(Float.parseFloat(mViewHolder.altura.getText().toString()) >= 50){
+                        mViewHolder.altura.setText("" + Float.parseFloat(mViewHolder.altura.getText().toString())  * 0.01);
                     }
                     else if(Float.parseFloat(mViewHolder.altura.getText().toString()) > 4 || Float.parseFloat(mViewHolder.altura.getText().toString()) < 0){
                         mViewHolder.altura.setError("Altura Inválida!");
