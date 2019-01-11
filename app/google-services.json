@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "989501213073",
+    "firebase_url": "https://nutrifood-89aa3.firebaseio.com",
+    "project_id": "nutrifood-89aa3",
+    "storage_bucket": "nutrifood-89aa3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:989501213073:android:6acf90857d4b4a76",
+        "android_client_info": {
+          "package_name": "br.com.icoddevelopers.nutrifood"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "989501213073-7gf22a0mukohb2rl7jceubo8cob99b4o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.com.icoddevelopers.nutrifood",
+            "certificate_hash": "889f563cdaca2df2ac60f59c0c2e64d018786bdc"
+          }
+        },
+        {
+          "client_id": "989501213073-cpk4fs77apnu0dsa58uptpqe69ke60j9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD57mgSEXIJVyhXp04OkaSNhX5z6BBf7bk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "989501213073-cpk4fs77apnu0dsa58uptpqe69ke60j9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
