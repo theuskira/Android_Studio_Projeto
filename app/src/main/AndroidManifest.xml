@@ -34,7 +34,8 @@
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login" />
-        <activity android:name=".OrientacaoActivity"></activity>
+        <activity android:name=".OrientacaoActivity" />
+        <activity android:name=".CadastroAlimentosActivity"></activity>
     </application>
 
 </manifest>

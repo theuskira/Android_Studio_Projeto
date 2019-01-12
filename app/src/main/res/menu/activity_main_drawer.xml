@@ -18,12 +18,16 @@
             android:title="Orientação Nutricional" />
         <item
             android:id="@+id/nav_alarme"
-            android:icon="@drawable/relogio"
+            android:icon="@android:drawable/ic_lock_idle_alarm"
             android:title="@string/alarmes" />
         <item
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_manage"
             android:title="Editar" />
+        <item
+            android:id="@+id/nav_Add_fruta"
+            android:icon="@drawable/adddatabase"
+            android:title="Adicionar Alimento" />
     </group>
 
     <item android:title="@string/conta"

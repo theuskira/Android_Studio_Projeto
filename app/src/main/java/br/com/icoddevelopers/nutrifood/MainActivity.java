@@ -92,15 +92,19 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
         }
         else if (id == R.id.nav_orientacao) {
-            //Intent intent = new Intent(MainActivity.this, CalculoProfiActivity.class);
-            //startActivity(intent);
+            Intent intent = new Intent(MainActivity.this, OrientacaoActivity.class);
+            startActivity(intent);
             Toast.makeText(MainActivity.this, "Orientação Nutricional", Toast.LENGTH_LONG).show();
         }
         else if (id == R.id.nav_alarme) {
             Toast.makeText(MainActivity.this, "Alarmes", Toast.LENGTH_LONG).show();
         }
         else if (id == R.id.nav_manage) {
-
+            Toast.makeText(MainActivity.this, "Editar", Toast.LENGTH_LONG).show();
+        }
+        else if (id == R.id.nav_Add_fruta) {
+            Intent intent = new Intent(MainActivity.this, CadastroAlimentosActivity.class);
+            startActivity(intent);
         }
         else if (id == R.id.nav_entrar) {
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
