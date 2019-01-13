@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
@@ -70,56 +71,15 @@ public class CadastroAlimentosActivity extends AppCompatActivity {
                         mViewHolder.altura.setError("Altura Inválida!");
                         erro = true;
                     }*/
-                    if(this.calorias.getText().toString().equals("")){
-                        this.calorias.setError("Digite a Caloria!");
-                        erro = true;
-                    }
-                    if(this.gorduras_t.getText().toString().equals("")){
-                        this.gorduras_t.setError("Digite a Gordura Total!");
-                        erro = true;
-                    }
-                    if(this.colesterol.getText().toString().equals("")){
-                        this.colesterol.setError("Digite o Colesterol!");
-                        erro = true;
-                    }
-                    if(this.sodio.getText().toString().equals("")){
-                        this.sodio.setError("Digite o Sódio!");
-                        erro = true;
-                    }
-                    if(this.potassio.getText().toString().equals("")){
-                        this.potassio.setError("Digite o Potássio!");
-                        erro = true;
-                    }
-                    if(this.carboidratos.getText().toString().equals("")){
-                        this.carboidratos.setError("Digite o Carboidrato!");
-                        erro = true;
-                    }
-                    if(this.proteinas.getText().toString().equals("")){
-                        this.proteinas.setError("Digite as Proteínas!");
-                        erro = true;
-                    }
                     if(!erro){
                         try{
 
-                            this.databaseReference.child(this.nome.getText().toString()).setValue(this.nome.getText().toString());
-                            this.databaseReference.child(this.nome.getText().toString()).child("Nome").setValue(this.nome.getText().toString());
-                            this.databaseReference.child(this.nome.getText().toString()).child("Calorias").setValue(this.calorias.getText().toString());
-                            this.databaseReference.child(this.nome.getText().toString()).child("Gorduras Totais").setValue(this.gorduras_t.getText().toString());
-                            this.databaseReference.child(this.nome.getText().toString()).child("Colesterol").setValue(this.colesterol.getText().toString());
-                            this.databaseReference.child(this.nome.getText().toString()).child("Sódio").setValue(this.sodio.getText().toString());
-                            this.databaseReference.child(this.nome.getText().toString()).child("Potássio").setValue(this.potassio.getText().toString());
-                            this.databaseReference.child(this.nome.getText().toString()).child("Carboidratos").setValue(this.carboidratos.getText().toString());
-                            this.databaseReference.child(this.nome.getText().toString()).child("Proteínas").setValue(this.proteinas.getText().toString());
+                            enviarDados();
 
                             Toast.makeText(getApplicationContext(), this.nome.getText().toString() + " adicionado!", Toast.LENGTH_LONG).show();
-                            this.nome.setText("");
-                            this.calorias.setText("");
-                            this.gorduras_t.setText("");
-                            this.colesterol.setText("");
-                            this.sodio.setText("");
-                            this.potassio.setText("");
-                            this.carboidratos.setText("");
-                            this.proteinas.setText("");
+
+                            limparCampos();
+
                         }catch (Exception e){
                             Toast.makeText(getApplicationContext(), "Erro: " + e, Toast.LENGTH_LONG).show();
                         }
@@ -136,5 +96,51 @@ public class CadastroAlimentosActivity extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void enviarDados(){
+
+        try{
+
+            this.databaseReference.child(this.nome.getText().toString()).setValue(this.nome.getText().toString());
+            this.databaseReference.child(this.nome.getText().toString()).child("Nome").setValue(this.nome.getText().toString());
+
+            if(!this.calorias.getText().toString().equals("")){
+                this.databaseReference.child(this.nome.getText().toString()).child("Calorias").setValue(Float.parseFloat(this.calorias.getText().toString()));
+            }
+            if(!this.gorduras_t.getText().toString().equals("")){
+                this.databaseReference.child(this.nome.getText().toString()).child("Gorduras Totais").setValue(Float.parseFloat(this.gorduras_t.getText().toString()));
+            }
+            if(!this.colesterol.getText().toString().equals("")){
+                this.databaseReference.child(this.nome.getText().toString()).child("Colesterol").setValue(Float.parseFloat(this.colesterol.getText().toString()));
+            }
+            if(!this.sodio.getText().toString().equals("")){
+                this.databaseReference.child(this.nome.getText().toString()).child("Sódio").setValue(Float.parseFloat(this.sodio.getText().toString()));
+            }
+            if(!this.potassio.getText().toString().equals("")){
+                this.databaseReference.child(this.nome.getText().toString()).child("Potássio").setValue(Float.parseFloat(this.potassio.getText().toString()));
+            }
+            if(!this.carboidratos.getText().toString().equals("")){
+                this.databaseReference.child(this.nome.getText().toString()).child("Carboidratos").setValue(Float.parseFloat(this.carboidratos.getText().toString()));
+            }
+            if(!this.proteinas.getText().toString().equals("")){
+                this.databaseReference.child(this.nome.getText().toString()).child("Proteínas").setValue(Float.parseFloat(this.proteinas.getText().toString()));
+            }
+
+        }catch (Exception e){
+            Toast.makeText(getApplicationContext(), "Erro: " + e, Toast.LENGTH_LONG).show();
+        }
+
+    }
+
+    private void limparCampos(){
+        this.nome.setText("");
+        this.calorias.setText("");
+        this.gorduras_t.setText("");
+        this.colesterol.setText("");
+        this.sodio.setText("");
+        this.potassio.setText("");
+        this.carboidratos.setText("");
+        this.proteinas.setText("");
     }
 }
