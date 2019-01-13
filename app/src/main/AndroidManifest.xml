@@ -31,11 +31,11 @@
         <activity android:name=".CalculoProfiActivity" />
         <activity android:name=".DadosVerificadosProfActivity" />
         <activity android:name=".ContaActivity" />
-        <activity
-            android:name=".LoginActivity"
-            android:label="@string/title_activity_login" />
         <activity android:name=".OrientacaoActivity" />
-        <activity android:name=".CadastroAlimentosActivity"></activity>
+        <activity android:name=".CadastroAlimentosActivity" />
+        <activity android:name=".AlimentosActivity" />
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".CadastroPessoaActivity"></activity>
     </application>
 
 </manifest>

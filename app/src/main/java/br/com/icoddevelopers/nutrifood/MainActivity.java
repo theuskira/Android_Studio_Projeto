@@ -99,6 +99,11 @@ public class MainActivity extends AppCompatActivity
         else if (id == R.id.nav_alarme) {
             Toast.makeText(MainActivity.this, "Alarmes", Toast.LENGTH_LONG).show();
         }
+        else if (id == R.id.nav_alimentos) {
+            Toast.makeText(MainActivity.this, "Alimentos", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(MainActivity.this, AlimentosActivity.class);
+            startActivity(intent);
+        }
         else if (id == R.id.nav_manage) {
             Toast.makeText(MainActivity.this, "Editar", Toast.LENGTH_LONG).show();
         }

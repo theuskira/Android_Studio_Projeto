@@ -1,6 +1,7 @@
 package br.com.icoddevelopers.nutrifood;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -10,6 +11,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -76,10 +80,6 @@ public class CadastroAlimentosActivity extends AppCompatActivity {
 
                             enviarDados();
 
-                            Toast.makeText(getApplicationContext(), this.nome.getText().toString() + " adicionado!", Toast.LENGTH_LONG).show();
-
-                            limparCampos();
-
                         }catch (Exception e){
                             Toast.makeText(getApplicationContext(), "Erro: " + e, Toast.LENGTH_LONG).show();
                         }
@@ -103,29 +103,41 @@ public class CadastroAlimentosActivity extends AppCompatActivity {
         try{
 
             this.databaseReference.child(this.nome.getText().toString()).setValue(this.nome.getText().toString());
-            this.databaseReference.child(this.nome.getText().toString()).child("Nome").setValue(this.nome.getText().toString());
+            this.databaseReference.child(this.nome.getText().toString()).child("Nome").setValue(this.nome.getText().toString())
+                    .addOnCompleteListener(CadastroAlimentosActivity.this, new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if(task.isSuccessful()){
+                                if(!calorias.getText().toString().equals("")){
+                                    databaseReference.child(nome.getText().toString()).child("Calorias").setValue(Float.parseFloat(calorias.getText().toString()));
+                                }
+                                if(!gorduras_t.getText().toString().equals("")){
+                                    databaseReference.child(nome.getText().toString()).child("Gorduras Totais").setValue(Float.parseFloat(gorduras_t.getText().toString()));
+                                }
+                                if(!colesterol.getText().toString().equals("")){
+                                    databaseReference.child(nome.getText().toString()).child("Colesterol").setValue(Float.parseFloat(colesterol.getText().toString()));
+                                }
+                                if(!sodio.getText().toString().equals("")){
+                                    databaseReference.child(nome.getText().toString()).child("Sódio").setValue(Float.parseFloat(sodio.getText().toString()));
+                                }
+                                if(!potassio.getText().toString().equals("")){
+                                    databaseReference.child(nome.getText().toString()).child("Potássio").setValue(Float.parseFloat(potassio.getText().toString()));
+                                }
+                                if(!carboidratos.getText().toString().equals("")){
+                                    databaseReference.child(nome.getText().toString()).child("Carboidratos").setValue(Float.parseFloat(carboidratos.getText().toString()));
+                                }
+                                if(!proteinas.getText().toString().equals("")){
+                                    databaseReference.child(nome.getText().toString()).child("Proteínas").setValue(Float.parseFloat(proteinas.getText().toString()));
+                                }
+                                Toast.makeText(CadastroAlimentosActivity.this, nome.getText().toString() + " cadastrado!", Toast.LENGTH_LONG).show();
+                                limparCampos();
+                            }else {
+                                Toast.makeText(CadastroAlimentosActivity.this, "Erro ao cadastrar " + nome.getText().toString() + "!", Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    });
 
-            if(!this.calorias.getText().toString().equals("")){
-                this.databaseReference.child(this.nome.getText().toString()).child("Calorias").setValue(Float.parseFloat(this.calorias.getText().toString()));
-            }
-            if(!this.gorduras_t.getText().toString().equals("")){
-                this.databaseReference.child(this.nome.getText().toString()).child("Gorduras Totais").setValue(Float.parseFloat(this.gorduras_t.getText().toString()));
-            }
-            if(!this.colesterol.getText().toString().equals("")){
-                this.databaseReference.child(this.nome.getText().toString()).child("Colesterol").setValue(Float.parseFloat(this.colesterol.getText().toString()));
-            }
-            if(!this.sodio.getText().toString().equals("")){
-                this.databaseReference.child(this.nome.getText().toString()).child("Sódio").setValue(Float.parseFloat(this.sodio.getText().toString()));
-            }
-            if(!this.potassio.getText().toString().equals("")){
-                this.databaseReference.child(this.nome.getText().toString()).child("Potássio").setValue(Float.parseFloat(this.potassio.getText().toString()));
-            }
-            if(!this.carboidratos.getText().toString().equals("")){
-                this.databaseReference.child(this.nome.getText().toString()).child("Carboidratos").setValue(Float.parseFloat(this.carboidratos.getText().toString()));
-            }
-            if(!this.proteinas.getText().toString().equals("")){
-                this.databaseReference.child(this.nome.getText().toString()).child("Proteínas").setValue(Float.parseFloat(this.proteinas.getText().toString()));
-            }
+
 
         }catch (Exception e){
             Toast.makeText(getApplicationContext(), "Erro: " + e, Toast.LENGTH_LONG).show();
