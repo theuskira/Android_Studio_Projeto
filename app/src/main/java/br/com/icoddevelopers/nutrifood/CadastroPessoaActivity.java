@@ -127,7 +127,7 @@ public class CadastroPessoaActivity extends AppCompatActivity {
                                     databaseReference.child(cadastroEmail.getText().toString()).child("Sobrenome").setValue(cadastroSobrenome.getText().toString());
                                 }
                                 if(!cadastroNumero.getText().toString().equals("")){
-                                    databaseReference.child(cadastroEmail.getText().toString()).child("Telefone").setValue(Float.parseFloat(cadastroNumero.getText().toString()));
+                                    databaseReference.child(cadastroEmail.getText().toString()).child("Telefone").setValue(Long.parseLong(cadastroNumero.getText().toString()));
                                 }
                             }else {
                                 Toast.makeText(CadastroPessoaActivity.this, "Erro ao cadastrar " + cadastroNome.getText().toString() + "!", Toast.LENGTH_LONG).show();
