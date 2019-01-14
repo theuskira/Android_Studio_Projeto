@@ -15,10 +15,20 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import br.com.icoddevelopers.nutrifood.R;
+import br.com.icoddevelopers.nutrifood.config.ConfiguracaoFirebase;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private FirebaseAuth autenticacao;
+    private Menu menu;
+    //private M
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +55,55 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        menu  = navigationView.getMenu();
+
+        if(!verificarusuario()){
+            menu.getItem(6).setVisible(false);
+        }
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if(!verificarusuario()){
+            menu.getItem(6).setVisible(false);
+        }
+    }
+
+    private boolean verificarusuario(){
+
+        try{
+            autenticacao = ConfiguracaoFirebase.getFirebaseAuth();
+            //Toast.makeText(MainActivity.this, "" + autenticacao.getCurrentUser().getEmail(), Toast.LENGTH_LONG).show();
+
+            FirebaseUser usuarioAtual = null;
+            if(autenticacao.getCurrentUser() != null){
+                usuarioAtual = autenticacao.getCurrentUser();
+            }
+
+            if(usuarioAtual != null){
+                Toast.makeText(MainActivity.this, "Bem vindo!", Toast.LENGTH_LONG).show();
+                return true;
+            }else{
+                Toast.makeText(MainActivity.this, "Deslogado!", Toast.LENGTH_LONG).show();
+                return false;
+            }
+        }catch (Exception e){
+            Toast.makeText(MainActivity.this, "Erro: " + e.getMessage(), Toast.LENGTH_LONG).show();
+            return false;
+        }
+    }
+
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(!verificarusuario()){
+            menu.getItem(6).setVisible(false);
+        }
     }
 
     @Override

@@ -9,11 +9,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseNetworkException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
@@ -27,6 +30,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText campoEmail, campoSenha;
     private FirebaseAuth autenticacao;
+    private ProgressBar progressBar;
+    private ScrollView scrollView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +44,8 @@ public class LoginActivity extends AppCompatActivity {
 
         this.campoEmail = findViewById(R.id.txtCadLogin_Email);
         this.campoSenha = findViewById(R.id.txtCadLogin_Senha);
+        this.progressBar = findViewById(R.id.login_progress);
+        this.scrollView = findViewById(R.id.login_form);
 
         autenticacao = ConfiguracaoFirebase.getFirebaseAuth();
 
@@ -46,6 +53,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void logarUsuario(Usuario usuario){
+
+        scrollView.setVisibility(View.GONE);
+        progressBar.setVisibility(View.VISIBLE);
 
         autenticacao.signInWithEmailAndPassword(usuario.getEmail(), usuario.getSenha())
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -63,11 +73,15 @@ public class LoginActivity extends AppCompatActivity {
                                 excessao = "Usuário não está cadastrado!";
                             }catch (FirebaseAuthInvalidCredentialsException e){
                                 excessao = "E-mail e senha não correspondem a um usuário cadastrado!";
+                            }catch (FirebaseNetworkException e){
+                                excessao = "Verifique sua conexão!";
                             }catch (Exception e){
                                 excessao = "Erro ao cadastrar usário: " + e.getMessage();
                                 e.printStackTrace();
                             }
                             Toast.makeText(LoginActivity.this, excessao, Toast.LENGTH_LONG).show();
+                            scrollView.setVisibility(View.VISIBLE);
+                            progressBar.setVisibility(View.GONE);
                         }
 
                     }

@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
+    <group
+        android:id="@+id/grupoFerramentas"
+        android:checkableBehavior="single">
         <item
             android:id="@+id/nav_camera"
             android:icon="@drawable/balanca"
@@ -34,7 +36,9 @@
             android:title="@string/adicionar_alimento" />
     </group>
 
-    <item android:title="@string/conta"
+    <item
+        android:id="@+id/grupoConta"
+        android:title="@string/conta"
         android:visible="true">
         <menu>
             <item
