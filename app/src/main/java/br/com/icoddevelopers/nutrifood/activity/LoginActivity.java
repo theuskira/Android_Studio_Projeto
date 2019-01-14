@@ -6,12 +6,13 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import br.com.icoddevelopers.nutrifood.R;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private Button btnCadastro;
+    private TextView btnCadastro;
     private Button btnEntrar;
 
     @Override
@@ -23,7 +24,7 @@ public class LoginActivity extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
         getSupportActionBar().setTitle("Entrar");     //Titulo para ser exibido na sua Action Bar em frente à seta
 
-        this.btnCadastro = findViewById(R.id.btnCadastrar);
+        this.btnCadastro = findViewById(R.id.btnCadastro);
         this.btnEntrar = findViewById(R.id.btnEntrar);
 
         this.btnCadastro.setOnClickListener(new View.OnClickListener() {

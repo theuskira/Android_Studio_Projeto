@@ -7,13 +7,22 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseNetworkException;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.text.DecimalFormat;
 
 import br.com.icoddevelopers.nutrifood.R;
 
@@ -29,6 +38,8 @@ public class CadastroAlimentosActivity extends AppCompatActivity {
     private EditText potassio;
     private EditText carboidratos;
     private EditText proteinas;
+    private ProgressBar progressBar;
+    private ScrollView scrollView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +58,8 @@ public class CadastroAlimentosActivity extends AppCompatActivity {
         this.potassio = findViewById(R.id.txtCadAlimentos_Potassio);
         this.carboidratos = findViewById(R.id.txtCadAlimentos_Carboidratos);
         this.proteinas = findViewById(R.id.txtCadAlimentos_Proteinas);
+        this.progressBar = findViewById(R.id.progressBarCad_Frutas);
+        this.scrollView = findViewById(R.id.scrowViewCad_Frutas);
 
     }
 
@@ -102,6 +115,9 @@ public class CadastroAlimentosActivity extends AppCompatActivity {
 
         try{
 
+            scrollView.setVisibility(View.GONE);
+            progressBar.setVisibility(View.VISIBLE);
+
             this.databaseReference.child(this.nome.getText().toString()).setValue(this.nome.getText().toString());
             this.databaseReference.child(this.nome.getText().toString()).child("Nome").setValue(this.nome.getText().toString())
                     .addOnCompleteListener(CadastroAlimentosActivity.this, new OnCompleteListener<Void>() {
@@ -130,9 +146,22 @@ public class CadastroAlimentosActivity extends AppCompatActivity {
                                     databaseReference.child(nome.getText().toString()).child("Proteínas").setValue(Float.parseFloat(proteinas.getText().toString()));
                                 }
                                 Toast.makeText(CadastroAlimentosActivity.this, nome.getText().toString() + " cadastrado!", Toast.LENGTH_LONG).show();
+                                scrollView.setVisibility(View.VISIBLE);
+                                progressBar.setVisibility(View.GONE);
                                 limparCampos();
                             }else {
-                                Toast.makeText(CadastroAlimentosActivity.this, "Erro ao cadastrar " + nome.getText().toString() + "!", Toast.LENGTH_LONG).show();
+                                String excessao = "";
+                                try{
+                                    throw task.getException();
+                                }catch (FirebaseNetworkException e){
+                                    excessao = "Verifique sua conexão!";
+                                }catch (Exception e){
+                                    excessao = "Erro: " + e.getMessage();
+                                    e.printStackTrace();
+                                }
+                                scrollView.setVisibility(View.VISIBLE);
+                                progressBar.setVisibility(View.GONE);
+                                Toast.makeText(CadastroAlimentosActivity.this, excessao, Toast.LENGTH_LONG).show();
                             }
                         }
                     });
