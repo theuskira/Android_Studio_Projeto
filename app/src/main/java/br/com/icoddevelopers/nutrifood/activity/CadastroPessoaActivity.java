@@ -75,7 +75,7 @@ public class CadastroPessoaActivity extends AppCompatActivity {
 
                         if(task.isSuccessful()){
                             Toast.makeText(getApplicationContext(), "Sucesso ao cadastrar " + usuario.getNome() + "!", Toast.LENGTH_LONG).show();
-                            finish();
+                            chamarMain();
                         }else {
                             scrollView.setVisibility(View.VISIBLE);
                             progressBar.setVisibility(View.GONE);
@@ -142,6 +142,12 @@ public class CadastroPessoaActivity extends AppCompatActivity {
 
         }
 
+    }
+
+    private void chamarMain(){
+        Intent intent = new Intent(CadastroPessoaActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     @Override

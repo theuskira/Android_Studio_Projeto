@@ -26,6 +26,7 @@
                     android:id="@+id/imagePerfil"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
+                    android:layout_margin="16dp"
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginRight="16dp"
@@ -47,7 +48,7 @@
                         android:layout_marginRight="16dp"
                         android:layout_weight="0"
                         android:hint="Nome"
-                        android:textColor="@android:color/background_light"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
@@ -85,7 +86,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -94,7 +94,7 @@
                     android:layout_marginLeft="16dp"
                     android:layout_weight="0"
                     android:text="@string/status"
-                    android:textColor="@android:color/white"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -122,7 +122,7 @@
                     android:layout_marginLeft="16dp"
                     android:layout_weight="0"
                     android:text="@string/peso_atual"
-                    android:textColor="@android:color/white"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -160,7 +160,7 @@
                     android:layout_marginLeft="16dp"
                     android:layout_weight="0"
                     android:text="@string/altura"
-                    android:textColor="@android:color/white"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -199,7 +199,7 @@
                     android:layout_marginLeft="16dp"
                     android:layout_weight="0"
                     android:text="@string/sexo"
-                    android:textColor="@android:color/white"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -229,7 +229,7 @@
                     android:layout_marginLeft="16dp"
                     android:layout_weight="0"
                     android:text="Necessidades Hídricas"
-                    android:textColor="@android:color/white"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -269,7 +269,7 @@
                     android:layout_marginLeft="16dp"
                     android:layout_weight="0"
                     android:text="Peso Ideal"
-                    android:textColor="@android:color/white"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -309,7 +309,7 @@
                     android:layout_marginLeft="16dp"
                     android:layout_weight="0"
                     android:text="Peso Ajustado"
-                    android:textColor="@android:color/white"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -344,7 +344,7 @@
                 android:layout_marginRight="16dp"
                 android:layout_weight="0"
                 android:text="@string/e_mail"
-                android:textColor="@android:color/white"
+                android:textColor="@color/colorPrimary"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 

@@ -33,23 +33,19 @@
         <item
             android:id="@+id/nav_Add_fruta"
             android:icon="@drawable/adddatabase"
-            android:title="@string/adicionar_alimento" />
+            android:title="@string/adicionar_alimento"
+            android:visible="false"/>
+        <item
+            android:id="@+id/nav_entrar"
+            android:icon="@android:drawable/ic_input_add"
+            android:title="@string/entrar_ou_se_cadastrar" />
+        <item
+            android:id="@+id/nav_perfil"
+            android:icon="@drawable/profile"
+            android:title="@string/informa_es"
+            android:visible="false"/>
     </group>
 
-    <item
-        android:id="@+id/grupoConta"
-        android:title="@string/conta"
-        android:visible="true">
-        <menu>
-            <item
-                android:id="@+id/nav_entrar"
-                android:icon="@android:drawable/ic_input_add"
-                android:title="@string/entrar_ou_se_cadastrar" />
-            <item
-                android:id="@+id/nav_perfil"
-                android:icon="@drawable/profile"
-                android:title="@string/informa_es" />
-        </menu>
-    </item>
+
 
 </menu>

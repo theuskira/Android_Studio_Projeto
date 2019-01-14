@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,9 +27,7 @@ public class MainActivity extends AppCompatActivity
 
     private FirebaseAuth autenticacao;
     private Menu menu;
-    //private M
-
-
+    private TextView email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,23 +55,54 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        this.email = findViewById(R.id.txtMainEmail);
+
         menu  = navigationView.getMenu();
 
-        if(!verificarusuario()){
-            menu.getItem(6).setVisible(false);
-        }
-
+        verificarusuario();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        if(!verificarusuario()){
-            menu.getItem(6).setVisible(false);
+        verificarusuario();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        verificarusuario();
+    }
+
+    public void entrarPerfil(View view){
+        try{
+            autenticacao = ConfiguracaoFirebase.getFirebaseAuth();
+            //Toast.makeText(MainActivity.this, "" + autenticacao.getCurrentUser().getEmail(), Toast.LENGTH_LONG).show();
+
+            FirebaseUser usuarioAtual = null;
+            if(autenticacao.getCurrentUser() != null){
+                usuarioAtual = autenticacao.getCurrentUser();
+            }
+
+            if(usuarioAtual != null){
+                Intent intent = new Intent(MainActivity.this, ContaActivity.class);
+                startActivity(intent);
+            }else{
+                Toast.makeText(MainActivity.this, "Usuario não conectado!", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        }catch (Exception e){
+            Toast.makeText(MainActivity.this, "Erro: " + e.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
 
-    private boolean verificarusuario(){
+    private void conta(){
+        Intent intent = new Intent(MainActivity.this, ContaActivity.class);
+        startActivity(intent);
+    }
+
+    private void verificarusuario(){
 
         try{
             autenticacao = ConfiguracaoFirebase.getFirebaseAuth();
@@ -84,25 +114,17 @@ public class MainActivity extends AppCompatActivity
             }
 
             if(usuarioAtual != null){
-                Toast.makeText(MainActivity.this, "Bem vindo!", Toast.LENGTH_LONG).show();
-                return true;
+                menu.getItem(6).setVisible(true);
+                menu.getItem(7).setVisible(false);
+                menu.getItem(8).setVisible(true);
+                //email.setText("" + usuarioAtual.getEmail());
             }else{
-                Toast.makeText(MainActivity.this, "Deslogado!", Toast.LENGTH_LONG).show();
-                return false;
+                menu.getItem(6).setVisible(false);
+                menu.getItem(7).setVisible(true);
+                menu.getItem(8).setVisible(false);
             }
         }catch (Exception e){
             Toast.makeText(MainActivity.this, "Erro: " + e.getMessage(), Toast.LENGTH_LONG).show();
-            return false;
-        }
-    }
-
-
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if(!verificarusuario()){
-            menu.getItem(6).setVisible(false);
         }
     }
 
@@ -177,8 +199,7 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
         }
         else if (id == R.id.nav_perfil) {
-            Intent intent = new Intent(MainActivity.this, ContaActivity.class);
-            startActivity(intent);
+            conta();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
