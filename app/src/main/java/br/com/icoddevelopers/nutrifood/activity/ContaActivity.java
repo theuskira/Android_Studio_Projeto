@@ -32,12 +32,13 @@ public class ContaActivity extends AppCompatActivity {
 
         this.email = findViewById(R.id.txtEmailPerfil);
 
+        autenticacao = ConfiguracaoFirebase.getFirebaseAuth();
+
         verificarDados();
     }
 
     private void verificarDados(){
         try{
-            autenticacao = ConfiguracaoFirebase.getFirebaseAuth();
             //Toast.makeText(MainActivity.this, "" + autenticacao.getCurrentUser().getEmail(), Toast.LENGTH_LONG).show();
 
             FirebaseUser usuarioAtual = null;
@@ -68,17 +69,27 @@ public class ContaActivity extends AppCompatActivity {
 
         int id = item.getItemId();
 
-        if(id == android.R.id.home){
-            startActivity(new Intent(this, MainActivity.class));  //O efeito ao ser pressionado do botão (no caso abre a activity)
-            finish();  //Método para matar a activity e não deixa-lá indexada na pilhagem
-            return true;
-        }else if(id == R.id.btnMenuConta_Editar){
-            Toast.makeText(this,"Editar!", Toast.LENGTH_LONG).show();
+        if(id == R.id.btnMenuConta_Editar){
+            abrirConfiguracoes();
         }
         else if(id == R.id.btnMenuConta_Deslogar){
-            Toast.makeText(this,"Deslogar!", Toast.LENGTH_LONG).show();
+            deslogarUsuario();
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void deslogarUsuario(){
+        try{
+            autenticacao.signOut();
+            finish();
+        }catch (Exception e){
+            Toast.makeText(this,"Err: " + e.getMessage(), Toast.LENGTH_LONG).show();
+            e.printStackTrace();
+        }
+    }
+
+    private void abrirConfiguracoes(){
+        startActivity(new Intent(this, EditarContaActivity.class));
     }
 }

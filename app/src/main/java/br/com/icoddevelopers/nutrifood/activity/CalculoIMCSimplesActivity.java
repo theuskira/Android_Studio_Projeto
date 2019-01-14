@@ -241,11 +241,7 @@ public class CalculoIMCSimplesActivity extends AppCompatActivity {
 
         int id = item.getItemId();
 
-        if(id == android.R.id.home){
-            startActivity(new Intent(this, MainActivity.class));  //O efeito ao ser pressionado do botão (no caso abre a activity)
-            finish();  //Método para matar a activity e não deixa-lá indexada na pilhagem
-            return true;
-        }else if(id == R.id.btnMenuInfo){
+        if(id == R.id.btnMenuInfo){
             Toast.makeText(CalculoIMCSimplesActivity.this, "Teste", Toast.LENGTH_LONG).show();
         }
 

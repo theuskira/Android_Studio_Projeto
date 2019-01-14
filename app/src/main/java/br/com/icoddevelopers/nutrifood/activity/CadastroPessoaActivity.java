@@ -149,19 +149,4 @@ public class CadastroPessoaActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) { //Botão adicional na ToolBar
-
-        int id = item.getItemId();
-
-        if(id == android.R.id.home){
-            startActivity(new Intent(this, LoginActivity.class));  //O efeito ao ser pressionado do botão (no caso abre a activity)
-            finish();  //Método para matar a activity e não deixa-lá indexada na pilhagem
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
 }

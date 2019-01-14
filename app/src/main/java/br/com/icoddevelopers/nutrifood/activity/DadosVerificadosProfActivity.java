@@ -153,18 +153,4 @@ public class DadosVerificadosProfActivity extends AppCompatActivity {
             return 21.7 * (altura * altura);
         }
     }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) { //Botão adicional na ToolBar
-        switch (item.getItemId()) {
-            case android.R.id.home:  //ID do seu botão (gerado automaticamente pelo android, usando como está, deve funcionar
-                startActivity(new Intent(this, CalculoProfiActivity.class));  //O efeito ao ser pressionado do botão (no caso abre a activity)
-                finish();  //Método para matar a activity e não deixa-lá indexada na pilhagem
-                break;
-            default:
-                break;
-        }
-        return true;
-    }
-
 }
