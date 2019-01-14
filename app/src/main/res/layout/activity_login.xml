@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layout_weight="0"
     android:background="@color/colorPrimaryDark"
-    android:gravity="center_horizontal"
+    android:gravity="center"
     android:orientation="vertical"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
@@ -15,18 +15,22 @@
     tools:context=".activity.LoginActivity">
 
     <!-- Login progress -->
+
     <ProgressBar
         android:id="@+id/login_progress"
         style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_margin="16dp"
         android:visibility="gone" />
 
     <ScrollView
         android:id="@+id/login_form"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:paddingBottom="16dp"
+        android:visibility="visible">
 
         <LinearLayout
             android:id="@+id/email_login_form"
@@ -38,6 +42,7 @@
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:layout_gravity="center_horizontal"
+                android:contentDescription="TODO"
                 app:srcCompat="@drawable/apple" />
 
             <android.support.design.widget.TextInputLayout
@@ -45,7 +50,7 @@
                 android:layout_height="wrap_content">
 
                 <AutoCompleteTextView
-                    android:id="@+id/email"
+                    android:id="@+id/txtCadLogin_Email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/prompt_email"
@@ -62,7 +67,7 @@
                 android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/password"
+                    android:id="@+id/txtCadLogin_Senha"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Senha"
@@ -82,35 +87,34 @@
                 style="?android:textAppearanceSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
+                android:layout_gravity="end"
                 android:layout_marginTop="16dp"
-                android:layout_weight="0"
+                android:layout_marginBottom="16dp"
                 android:background="@color/colorPrimary"
-                android:text="Entrar"
+                android:onClick="logarUsuario"
+                android:text="@string/entrar"
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
+            <TextView
+                android:id="@+id/btnCadastro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="5dp"
+                android:onClick="abrirTelaCadastro"
+                android:text="@string/nao_tem_uma_conta_cadastre_se_aqui"
+                android:textColor="@android:color/white" />
+
         </LinearLayout>
+
+
     </ScrollView>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="bottom|center_horizontal"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/btnCadastro"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginBottom="5dp"
-            android:text="Nao tem uma conta? Cadastre-se aqui."
-            android:textColor="@android:color/white" />
-    </LinearLayout>
 
 </LinearLayout>
