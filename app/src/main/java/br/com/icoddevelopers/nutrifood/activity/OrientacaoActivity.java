@@ -1,10 +1,12 @@
-package br.com.icoddevelopers.nutrifood;
+package br.com.icoddevelopers.nutrifood.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import br.com.icoddevelopers.nutrifood.R;
 
 public class OrientacaoActivity extends AppCompatActivity {
 

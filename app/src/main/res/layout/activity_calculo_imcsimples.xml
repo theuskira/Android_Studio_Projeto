@@ -9,7 +9,7 @@
     android:background="@color/colorPrimaryDark"
     android:orientation="vertical"
     android:scrollbars="vertical"
-    tools:context=".CalculoIMCSimplesActivity">
+    tools:context=".activity.CalculoIMCSimplesActivity">
 
 
     <ScrollView

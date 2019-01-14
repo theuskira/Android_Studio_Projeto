@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".SplashActivity"
+            android:name=".activity.SplashActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,18 +24,18 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".CalculoIMCSimplesActivity" />
-        <activity android:name=".CalculoProfiActivity" />
-        <activity android:name=".DadosVerificadosProfActivity" />
-        <activity android:name=".ContaActivity" />
-        <activity android:name=".OrientacaoActivity" />
-        <activity android:name=".CadastroAlimentosActivity" />
-        <activity android:name=".AlimentosActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".CadastroPessoaActivity"></activity>
+        <activity android:name=".activity.CalculoIMCSimplesActivity" />
+        <activity android:name=".activity.CalculoProfiActivity" />
+        <activity android:name=".activity.DadosVerificadosProfActivity" />
+        <activity android:name=".activity.ContaActivity" />
+        <activity android:name=".activity.OrientacaoActivity" />
+        <activity android:name=".activity.CadastroAlimentosActivity" />
+        <activity android:name=".activity.AlimentosActivity" />
+        <activity android:name=".activity.LoginActivity" />
+        <activity android:name=".activity.CadastroPessoaActivity"></activity>
     </application>
 
 </manifest>

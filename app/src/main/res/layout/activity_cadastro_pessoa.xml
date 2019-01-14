@@ -5,11 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark"
-    tools:context=".CadastroPessoaActivity">
+    android:gravity="center"
+    tools:context=".activity.CadastroPessoaActivity">
+
+    <ProgressBar
+        android:id="@+id/progressBarCad_Usuario"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|center_horizontal|center"
+        android:layout_weight="0"
+        android:visibility="gone" />
 
     <ScrollView
+        android:id="@+id/scrollViewCad_Usuario"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -87,7 +99,8 @@
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp">
 
                 <AutoCompleteTextView
                     android:id="@+id/cadastroSenha"
@@ -101,6 +114,23 @@
                     android:textColorHint="@color/colorPrimary" />
 
             </android.support.design.widget.TextInputLayout>
+
+            <Button
+                android:id="@+id/btnCadastrarUsuario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginBottom="16dp"
+                android:layout_weight="0"
+                android:background="@color/colorPrimary"
+                android:onClick="validarCadastroUsuario"
+                android:padding="10dp"
+                android:text="Cadastrar"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
         </LinearLayout>
     </ScrollView>
+
 </LinearLayout>

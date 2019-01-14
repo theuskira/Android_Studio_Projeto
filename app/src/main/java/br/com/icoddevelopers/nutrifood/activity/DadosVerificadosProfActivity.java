@@ -1,4 +1,4 @@
-package br.com.icoddevelopers.nutrifood;
+package br.com.icoddevelopers.nutrifood.activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +7,8 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
+
+import br.com.icoddevelopers.nutrifood.R;
 
 public class DadosVerificadosProfActivity extends AppCompatActivity {
 

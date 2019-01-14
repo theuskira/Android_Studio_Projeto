@@ -1,4 +1,4 @@
-package br.com.icoddevelopers.nutrifood;
+package br.com.icoddevelopers.nutrifood.activity;
 
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.Toast;
+
+import br.com.icoddevelopers.nutrifood.R;
 
 public class CalculoProfiActivity extends AppCompatActivity {
 

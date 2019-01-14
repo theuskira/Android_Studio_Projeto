@@ -10,7 +10,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context=".LoginActivity">
+    tools:context=".activity.LoginActivity">
 
     <!-- Login progress -->
     <ProgressBar
@@ -71,7 +71,7 @@
             </android.support.design.widget.TextInputLayout>
 
             <Button
-                android:id="@+id/email_sign_in_button"
+                android:id="@+id/btnEntrar"
                 style="?android:textAppearanceSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -82,6 +82,7 @@
                 android:text="Entrar"
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <Button
@@ -96,6 +97,7 @@
                 android:text="Cadastrar"
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
         </LinearLayout>

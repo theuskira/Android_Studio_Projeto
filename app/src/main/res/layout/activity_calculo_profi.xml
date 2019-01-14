@@ -8,7 +8,7 @@
     android:layout_weight="0"
     android:background="@color/colorPrimaryDark"
     android:orientation="vertical"
-    tools:context=".CalculoProfiActivity">
+    tools:context=".activity.CalculoProfiActivity">
 
     <ScrollView
         android:layout_width="match_parent"

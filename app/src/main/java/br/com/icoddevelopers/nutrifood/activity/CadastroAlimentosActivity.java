@@ -1,4 +1,4 @@
-package br.com.icoddevelopers.nutrifood;
+package br.com.icoddevelopers.nutrifood.activity;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -8,14 +8,14 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import br.com.icoddevelopers.nutrifood.R;
 
 public class CadastroAlimentosActivity extends AppCompatActivity {
 
