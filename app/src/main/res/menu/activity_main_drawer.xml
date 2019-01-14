@@ -7,15 +7,15 @@
         <item
             android:id="@+id/nav_camera"
             android:icon="@drawable/balanca"
-            android:title="Cálculo IMC" />
+            android:title="@string/c_lculo_imc" />
         <item
             android:id="@+id/nav_profi"
             android:icon="@drawable/calculator"
-            android:title="Cálculo Avançado" />
+            android:title="@string/c_lculo_avan_ado" />
         <item
             android:id="@+id/nav_orientacao"
             android:icon="@drawable/ingredients"
-            android:title="Orientação Nutricional" />
+            android:title="@string/orienta_o_nutricional" />
         <item
             android:id="@+id/nav_alarme"
             android:icon="@android:drawable/ic_lock_idle_alarm"
@@ -27,11 +27,11 @@
         <item
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Editar" />
+            android:title="@string/editar" />
         <item
             android:id="@+id/nav_Add_fruta"
             android:icon="@drawable/adddatabase"
-            android:title="Adicionar Alimento" />
+            android:title="@string/adicionar_alimento" />
     </group>
 
     <item android:title="@string/conta"
@@ -40,11 +40,11 @@
             <item
                 android:id="@+id/nav_entrar"
                 android:icon="@android:drawable/ic_input_add"
-                android:title="@string/entrar" />
+                android:title="@string/entrar_ou_se_cadastrar" />
             <item
                 android:id="@+id/nav_perfil"
                 android:icon="@drawable/profile"
-                android:title="Informações" />
+                android:title="@string/informa_es" />
         </menu>
     </item>
 

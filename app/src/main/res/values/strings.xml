@@ -47,4 +47,10 @@
     </string>
     <string name="alimentos">Alimentos</string>
     <string name="nao_tem_uma_conta_cadastre_se_aqui">Nao tem uma conta? Cadastre-se aqui.</string>
+    <string name="entrar_ou_se_cadastrar">Entrar ou se Cadastrar</string>
+    <string name="orienta_o_nutricional">Orientação Nutricional</string>
+    <string name="c_lculo_avan_ado">Cálculo Avançado</string>
+    <string name="c_lculo_imc">Cálculo IMC</string>
+    <string name="editar">Editar</string>
+    <string name="adicionar_alimento">Adicionar Alimento</string>
 </resources>
