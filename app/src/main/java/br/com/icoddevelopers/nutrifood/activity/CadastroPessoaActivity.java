@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.media.Image;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -23,22 +24,27 @@ import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseNetworkException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
-import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
-import br.com.icoddevelopers.nutrifood.activity.helper.Base64Custom;
-import br.com.icoddevelopers.nutrifood.activity.helper.Permissao;
+import java.io.ByteArrayOutputStream;
+
+import br.com.icoddevelopers.nutrifood.helper.Base64Custom;
+import br.com.icoddevelopers.nutrifood.helper.Permissao;
 import br.com.icoddevelopers.nutrifood.config.ConfiguracaoFirebase;
 import br.com.icoddevelopers.nutrifood.R;
+import br.com.icoddevelopers.nutrifood.helper.UsuarioFirebase;
 import br.com.icoddevelopers.nutrifood.model.Usuario;
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -49,8 +55,12 @@ public class CadastroPessoaActivity extends AppCompatActivity {
             Manifest.permission.CAMERA
     };
 
+    private
+    Bitmap imagem = null;
+
     private FirebaseAuth autenticacao;
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Usuarios");
+    private StorageReference storageReference;
 
     private ImageButton imageButtonCamera, imageButtonGaleria;
 
@@ -68,6 +78,9 @@ public class CadastroPessoaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_pessoa);
+
+        //COnfigurações Iniciais
+        storageReference = ConfiguracaoFirebase.getFirebaseStorage();
 
         //Validar Permissões
         Permissao.validarPermissoes(permissoesNecessarias, this, 1);
@@ -135,8 +148,7 @@ public class CadastroPessoaActivity extends AppCompatActivity {
 
                             try{
 
-                                String indentificadorUsuario = Base64Custom.codificarBase64(usuario.getEmail());
-                                usuario.setId(indentificadorUsuario);
+                                usuario.setId(UsuarioFirebase.getIndentificadorUsuario());
 
                                 databaseReference.child(usuario.getId()).child("Email").setValue(usuario.getEmail());
                                 databaseReference.child(usuario.getId()).child("Nome").setValue(usuario.getNome());
@@ -150,8 +162,12 @@ public class CadastroPessoaActivity extends AppCompatActivity {
                                 if(!cadastroPeso.getText().toString().equals("")){
                                     databaseReference.child(usuario.getId()).child("Peso").setValue(usuario.getPeso());
                                 }
+
+                                if(circleImageViewPerfil != null){
+                                    salverImagemFirebase(usuario.getId());
+                                }
                             }catch (Exception e){
-                                Toast.makeText(CadastroPessoaActivity.this, "Erro ao salvar informações: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                                Toast.makeText(CadastroPessoaActivity.this, "Erro ao salvar informações: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                                 e.printStackTrace();
                             }
                         }else {
@@ -268,7 +284,6 @@ public class CadastroPessoaActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if(resultCode == RESULT_OK){
-            Bitmap imagem = null;
 
             try{
 
@@ -319,5 +334,37 @@ public class CadastroPessoaActivity extends AppCompatActivity {
 
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    private void salverImagemFirebase(String identificadorUsuario){
+        if(imagem != null){
+            try {
+                //Recuperar Dados da Imagem para o Firebase
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                imagem.compress(Bitmap.CompressFormat.JPEG, 70, baos);
+                byte[] dadosImagem = baos.toByteArray();
+
+                //Salvar Imagem no Firebase
+                StorageReference imageRef = storageReference.child("imagens")
+                        .child("perfil")
+                        .child(identificadorUsuario)
+                        .child("perfil.jpeg");
+
+                UploadTask uploadTask = imageRef.putBytes(dadosImagem);
+                uploadTask.addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(CadastroPessoaActivity.this, "Erro ao fazer upload da imagem", Toast.LENGTH_SHORT).show();
+                    }
+                }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        Toast.makeText(CadastroPessoaActivity.this, "Sucesso ao fazer upload da imagem", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
     }
 }

@@ -1,4 +1,4 @@
-package br.com.icoddevelopers.nutrifood.activity.helper;
+package br.com.icoddevelopers.nutrifood.helper;
 
 import android.util.Base64;
 
