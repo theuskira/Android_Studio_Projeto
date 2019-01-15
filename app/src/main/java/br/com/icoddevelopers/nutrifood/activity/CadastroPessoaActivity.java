@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.media.Image;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -23,9 +22,8 @@ import android.widget.RadioButton;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseNetworkException;
 import com.google.firebase.auth.AuthResult;
@@ -40,7 +38,6 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 
-import br.com.icoddevelopers.nutrifood.helper.Base64Custom;
 import br.com.icoddevelopers.nutrifood.helper.Permissao;
 import br.com.icoddevelopers.nutrifood.config.ConfiguracaoFirebase;
 import br.com.icoddevelopers.nutrifood.R;
@@ -164,7 +161,7 @@ public class CadastroPessoaActivity extends AppCompatActivity {
                                 }
 
                                 if(circleImageViewPerfil != null){
-                                    salverImagemFirebase(usuario.getId());
+                                    salvarImagemFirebase(usuario.getId());
                                 }
                             }catch (Exception e){
                                 Toast.makeText(CadastroPessoaActivity.this, "Erro ao salvar informações: " + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -300,7 +297,6 @@ public class CadastroPessoaActivity extends AppCompatActivity {
                 if(imagem != null){
                     circleImageViewPerfil.setImageBitmap(imagem);
                 }
-
             }catch (Exception e){
                 e.printStackTrace();
             }
@@ -338,7 +334,7 @@ public class CadastroPessoaActivity extends AppCompatActivity {
 
 
     //Salvar Imagem
-    private void salverImagemFirebase(String identificadorUsuario){
+    private void salvarImagemFirebase(String identificadorUsuario){
         if(imagem != null){
             try {
                 //Recuperar Dados da Imagem para o Firebase
@@ -347,12 +343,39 @@ public class CadastroPessoaActivity extends AppCompatActivity {
                 byte[] dadosImagem = baos.toByteArray();
 
                 //Salvar Imagem no Firebase
-                StorageReference imageRef = storageReference.child("imagens")
+                final StorageReference imageRef = storageReference.child("imagens")
                         .child("perfil")
                         //.child(identificadorUsuario)
                         .child(identificadorUsuario + ".jpeg");
 
                 UploadTask uploadTask = imageRef.putBytes(dadosImagem);
+
+                uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                    @Override
+                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+
+                        if(!task.isSuccessful()){
+                            throw task.getException();
+                        }
+
+                        return imageRef.getDownloadUrl();
+                    }
+                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Uri> task) {
+
+                        if(task.isSuccessful()){
+
+                            Toast.makeText(CadastroPessoaActivity.this, "Sucesso ao alterar a foto de perfil", Toast.LENGTH_SHORT).show();
+
+                            Uri downloadUri = task.getResult();
+
+                        }else {
+                            Toast.makeText(CadastroPessoaActivity.this, "Erro ao alterar a foto de perfil", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+                /*
                 uploadTask.addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
@@ -362,11 +385,20 @@ public class CadastroPessoaActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         Toast.makeText(CadastroPessoaActivity.this, "Sucesso ao fazer upload da imagem", Toast.LENGTH_SHORT).show();
+
+                        Uri url = taskSnapshot.getTask().getSnapshot().getStorage().getDownloadUrl().getResult();
+
+                        atualizarFotoUsuario(url);
+
                     }
-                });
+                });*/
             }catch (Exception e){
                 e.printStackTrace();
             }
         }
+    }
+
+    public void atualizarFotoUsuario(Uri url){
+        Toast.makeText(CadastroPessoaActivity.this, url.toString(), Toast.LENGTH_SHORT).show();
     }
 }
