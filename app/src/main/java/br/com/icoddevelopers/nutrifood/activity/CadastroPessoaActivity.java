@@ -1,5 +1,6 @@
 package br.com.icoddevelopers.nutrifood.activity;
 
+import android.Manifest;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -28,11 +29,17 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import br.com.icoddevelopers.nutrifood.activity.helper.Base64Custom;
+import br.com.icoddevelopers.nutrifood.activity.helper.Permissao;
 import br.com.icoddevelopers.nutrifood.config.ConfiguracaoFirebase;
 import br.com.icoddevelopers.nutrifood.R;
 import br.com.icoddevelopers.nutrifood.model.Usuario;
 
 public class CadastroPessoaActivity extends AppCompatActivity {
+
+    private String[] permissoesNecessarias = new String[]{
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.CAMERA
+    };
 
     private FirebaseAuth autenticacao;
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Usuarios");
@@ -46,6 +53,9 @@ public class CadastroPessoaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_pessoa);
+
+        //Validar Permissões
+        Permissao.validarPermissoes(permissoesNecessarias, this, 1);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
@@ -131,10 +141,15 @@ public class CadastroPessoaActivity extends AppCompatActivity {
 
     }
 
-    public void validarCadastroUsuario(View view){
+    public void validarCadastroUsuario(){
 
         boolean erro = false;
         Usuario usuario = new Usuario();
+
+        usuario.setNome("");
+        usuario.setEmail("");
+        usuario.setSenha("");
+        usuario.setSexo("");
 
         if(cadastroNome.getText().toString().equals("")){
             this.cadastroNome.setError("Digite o Nome!");
@@ -178,6 +193,25 @@ public class CadastroPessoaActivity extends AppCompatActivity {
             cadastrarUsuario(usuario);
 
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.cadastrar, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        if(id == R.id.btnMenuCadastrar){
+            validarCadastroUsuario();
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     private void chamarMain(){

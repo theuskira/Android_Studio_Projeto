@@ -29,6 +29,15 @@
             android:layout_margin="16dp"
             android:orientation="vertical">
 
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/circleImageViewAddFotoPerfil"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:src="@drawable/add_customer" />
+
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -176,22 +185,6 @@
                         android:textStyle="bold" />
                 </RadioGroup>
             </LinearLayout>
-
-            <Button
-                android:id="@+id/btnCadastrarUsuario"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:layout_marginBottom="16dp"
-                android:layout_weight="0"
-                android:background="@color/colorPrimary"
-                android:onClick="validarCadastroUsuario"
-                android:padding="10dp"
-                android:text="Cadastrar"
-                android:textAllCaps="false"
-                android:textColor="@android:color/white"
-                android:textSize="18sp"
-                android:textStyle="bold" />
 
         </LinearLayout>
     </ScrollView>
