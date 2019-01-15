@@ -336,6 +336,8 @@ public class CadastroPessoaActivity extends AppCompatActivity {
         dialog.show();
     }
 
+
+    //Salvar Imagem
     private void salverImagemFirebase(String identificadorUsuario){
         if(imagem != null){
             try {
