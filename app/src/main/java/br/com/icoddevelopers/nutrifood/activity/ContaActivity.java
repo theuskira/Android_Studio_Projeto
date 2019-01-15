@@ -1,6 +1,7 @@
 package br.com.icoddevelopers.nutrifood.activity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,17 +10,22 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import br.com.icoddevelopers.nutrifood.R;
 import br.com.icoddevelopers.nutrifood.config.ConfiguracaoFirebase;
+import br.com.icoddevelopers.nutrifood.helper.UsuarioFirebase;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ContaActivity extends AppCompatActivity {
 
     private TextView email;
 
     private FirebaseAuth autenticacao;
+
+    private CircleImageView circleImageViewPerfil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +39,19 @@ public class ContaActivity extends AppCompatActivity {
         this.email = findViewById(R.id.txtEmailPerfil);
 
         autenticacao = ConfiguracaoFirebase.getFirebaseAuth();
+
+        this.circleImageViewPerfil = findViewById(R.id.circleImageViewFotoPerfil);
+
+        FirebaseUser usuario = UsuarioFirebase.getUsuarioAtual();
+        Uri url = usuario.getPhotoUrl();
+
+        if(url != null){
+            Glide.with(ContaActivity.this)
+                    .load(url)
+                    .into(circleImageViewPerfil);
+        }else {
+            circleImageViewPerfil.setImageResource(R.drawable.balanca);
+        }
 
         verificarDados();
     }

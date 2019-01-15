@@ -370,6 +370,7 @@ public class CadastroPessoaActivity extends AppCompatActivity {
 
                             Uri downloadUri = task.getResult();
 
+                            atualizaFotoUsuario(downloadUri);
                         }else {
                             Toast.makeText(CadastroPessoaActivity.this, "Erro ao alterar a foto de perfil", Toast.LENGTH_SHORT).show();
                         }
@@ -398,7 +399,7 @@ public class CadastroPessoaActivity extends AppCompatActivity {
         }
     }
 
-    public void atualizarFotoUsuario(Uri url){
-        Toast.makeText(CadastroPessoaActivity.this, url.toString(), Toast.LENGTH_SHORT).show();
+    public void atualizaFotoUsuario(Uri url){
+        UsuarioFirebase.atualizarFotoUsuario(url);
     }
 }
