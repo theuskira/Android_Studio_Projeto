@@ -2,13 +2,21 @@ package br.com.icoddevelopers.nutrifood.model;
 
 public class Usuario {
 
+    private String id;
     private String nome;
-    private String sobreNome;
     private String email;
     private String senha;
     private long numero;
 
     public Usuario() {
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -17,14 +25,6 @@ public class Usuario {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public String getSobreNome() {
-        return sobreNome;
-    }
-
-    public void setSobreNome(String sobreNome) {
-        this.sobreNome = sobreNome;
     }
 
     public String getEmail() {

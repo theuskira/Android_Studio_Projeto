@@ -26,6 +26,7 @@ import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import br.com.icoddevelopers.nutrifood.activity.helper.Base64Custom;
 import br.com.icoddevelopers.nutrifood.config.ConfiguracaoFirebase;
 import br.com.icoddevelopers.nutrifood.R;
 import br.com.icoddevelopers.nutrifood.model.Usuario;
@@ -33,9 +34,9 @@ import br.com.icoddevelopers.nutrifood.model.Usuario;
 public class CadastroPessoaActivity extends AppCompatActivity {
 
     private FirebaseAuth autenticacao;
+    private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Usuarios");
 
     private EditText cadastroNome;
-    private EditText cadastroSobrenome;
     private EditText cadastroEmail;
     private EditText cadastroNumero;
     private EditText cadastroSenha;
@@ -52,7 +53,6 @@ public class CadastroPessoaActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Cadastrar");     //Titulo para ser exibido na sua Action Bar em frente à seta
 
         this.cadastroNome = findViewById(R.id.cadastroNome);
-        this.cadastroSobrenome = findViewById(R.id.cadastroSobrenome);
         this.cadastroEmail = findViewById(R.id.cadastroEmail);
         this.cadastroNumero = findViewById(R.id.cadastroTelefone);
         this.cadastroSenha = findViewById(R.id.cadastroSenha);
@@ -76,6 +76,22 @@ public class CadastroPessoaActivity extends AppCompatActivity {
                         if(task.isSuccessful()){
                             Toast.makeText(getApplicationContext(), "Sucesso ao cadastrar " + usuario.getNome() + "!", Toast.LENGTH_LONG).show();
                             chamarMain();
+
+                            try{
+
+                                String indentificadorUsuario = Base64Custom.codificarBase64(usuario.getEmail());
+                                usuario.setId(indentificadorUsuario);
+
+                                databaseReference.child(usuario.getId()).child("Email").setValue(usuario.getEmail());
+                                databaseReference.child(usuario.getId()).child("Nome").setValue(usuario.getNome());
+                                if(!usuario.getNome().equals("")){
+                                    databaseReference.child(usuario.getId()).child("Numero").setValue(usuario.getNumero());
+                                }
+                            }catch (Exception e){
+                                Toast.makeText(CadastroPessoaActivity.this, "Erro ao salvar informações: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                e.printStackTrace();
+                            }
+
                         }else {
                             scrollView.setVisibility(View.VISIBLE);
                             progressBar.setVisibility(View.GONE);
@@ -131,9 +147,6 @@ public class CadastroPessoaActivity extends AppCompatActivity {
         }
 
         if(!erro){
-            if(!cadastroSobrenome.getText().toString().equals("")){
-                usuario.setSobreNome(cadastroSobrenome.getText().toString());
-            }
             if(!cadastroNumero.getText().toString().equals("")){
                 usuario.setNumero(Long.parseLong(cadastroNumero.getText().toString()));
             }
@@ -141,7 +154,6 @@ public class CadastroPessoaActivity extends AppCompatActivity {
             cadastrarUsuario(usuario);
 
         }
-
     }
 
     private void chamarMain(){
