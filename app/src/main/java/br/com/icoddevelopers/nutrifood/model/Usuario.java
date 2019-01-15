@@ -6,9 +6,36 @@ public class Usuario {
     private String nome;
     private String email;
     private String senha;
+    private String sexo;
     private long numero;
+    private float peso;
+    private float altura;
 
     public Usuario() {
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+
+    public float getPeso() {
+        return peso;
+    }
+
+    public void setPeso(float peso) {
+        this.peso = peso;
+    }
+
+    public float getAltura() {
+        return altura;
+    }
+
+    public void setAltura(float altura) {
+        this.altura = altura;
     }
 
     public String getId() {

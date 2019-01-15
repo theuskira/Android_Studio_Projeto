@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
@@ -36,10 +37,8 @@ public class CadastroPessoaActivity extends AppCompatActivity {
     private FirebaseAuth autenticacao;
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Usuarios");
 
-    private EditText cadastroNome;
-    private EditText cadastroEmail;
-    private EditText cadastroNumero;
-    private EditText cadastroSenha;
+    private EditText cadastroNome, cadastroEmail, cadastroNumero, cadastroSenha, cadastroPeso, cadastroAltura;
+    private RadioButton radioButtonMasculino, radioButtonFeminino;
     private ProgressBar progressBar;
     private ScrollView scrollView;
 
@@ -56,6 +55,10 @@ public class CadastroPessoaActivity extends AppCompatActivity {
         this.cadastroEmail = findViewById(R.id.cadastroEmail);
         this.cadastroNumero = findViewById(R.id.cadastroTelefone);
         this.cadastroSenha = findViewById(R.id.cadastroSenha);
+        this.cadastroPeso = findViewById(R.id.cadastroPesoAtual);
+        this.cadastroAltura = findViewById(R.id.cadastroAlturaAtual);
+        this.radioButtonMasculino = findViewById(R.id.radioButtonCadMasculino);
+        this.radioButtonFeminino = findViewById(R.id.radioButtonCadFeminino);
         this.progressBar = findViewById(R.id.progressBarCad_Usuario);
         this.scrollView = findViewById(R.id.scrollViewCad_Usuario);
 
@@ -84,14 +87,20 @@ public class CadastroPessoaActivity extends AppCompatActivity {
 
                                 databaseReference.child(usuario.getId()).child("Email").setValue(usuario.getEmail());
                                 databaseReference.child(usuario.getId()).child("Nome").setValue(usuario.getNome());
-                                if(!usuario.getNome().equals("")){
-                                    databaseReference.child(usuario.getId()).child("Numero").setValue(usuario.getNumero());
+                                databaseReference.child(usuario.getId()).child("Numero").setValue(usuario.getNumero());
+                                if(!usuario.getSexo().equals("")){
+                                    databaseReference.child(usuario.getId()).child("Sexo").setValue(usuario.getSexo());
+                                }
+                                if(!cadastroAltura.getText().toString().equals("")){
+                                    databaseReference.child(usuario.getId()).child("Altura").setValue(usuario.getAltura());
+                                }
+                                if(!cadastroPeso.getText().toString().equals("")){
+                                    databaseReference.child(usuario.getId()).child("Peso").setValue(usuario.getPeso());
                                 }
                             }catch (Exception e){
-                                Toast.makeText(CadastroPessoaActivity.this, "Erro ao salvar informações: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(CadastroPessoaActivity.this, "Erro ao salvar informações: " + e.getMessage(), Toast.LENGTH_LONG).show();
                                 e.printStackTrace();
                             }
-
                         }else {
                             scrollView.setVisibility(View.VISIBLE);
                             progressBar.setVisibility(View.GONE);
@@ -139,6 +148,12 @@ public class CadastroPessoaActivity extends AppCompatActivity {
         }else{
             usuario.setEmail(cadastroEmail.getText().toString());
         }
+        if(cadastroNumero.getText().toString().equals("")){
+            this.cadastroNumero.setError("Digite o Numero!");
+            erro = true;
+        }else{
+            usuario.setNumero(Long.parseLong(cadastroNumero.getText().toString()));
+        }
         if(cadastroSenha.getText().toString().equals("")){
             this.cadastroSenha.setError("Digite a Senha!");
             erro = true;
@@ -147,8 +162,17 @@ public class CadastroPessoaActivity extends AppCompatActivity {
         }
 
         if(!erro){
-            if(!cadastroNumero.getText().toString().equals("")){
-                usuario.setNumero(Long.parseLong(cadastroNumero.getText().toString()));
+            if(!cadastroPeso.getText().toString().equals("")){
+                usuario.setPeso(Float.parseFloat(cadastroPeso.getText().toString()));
+            }
+            if(!cadastroAltura.getText().toString().equals("")){
+                usuario.setAltura(Float.parseFloat(cadastroAltura.getText().toString()));
+            }
+            if(radioButtonMasculino.isChecked()){
+                usuario.setSexo("Masculino");
+            }
+            if(radioButtonFeminino.isChecked()){
+                usuario.setSexo("Feminino");
             }
 
             cadastrarUsuario(usuario);
