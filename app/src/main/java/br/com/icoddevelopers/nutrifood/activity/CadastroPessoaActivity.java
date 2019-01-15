@@ -1,8 +1,14 @@
 package br.com.icoddevelopers.nutrifood.activity;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -10,6 +16,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.ScrollView;
@@ -33,6 +40,7 @@ import br.com.icoddevelopers.nutrifood.activity.helper.Permissao;
 import br.com.icoddevelopers.nutrifood.config.ConfiguracaoFirebase;
 import br.com.icoddevelopers.nutrifood.R;
 import br.com.icoddevelopers.nutrifood.model.Usuario;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class CadastroPessoaActivity extends AppCompatActivity {
 
@@ -43,6 +51,13 @@ public class CadastroPessoaActivity extends AppCompatActivity {
 
     private FirebaseAuth autenticacao;
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Usuarios");
+
+    private ImageButton imageButtonCamera, imageButtonGaleria;
+
+    private static final int SELECAO_CAMERA = 100;
+    private static final int SELECAO_GALERIA = 200;
+
+    private CircleImageView circleImageViewPerfil;
 
     private EditText cadastroNome, cadastroEmail, cadastroNumero, cadastroSenha, cadastroPeso, cadastroAltura;
     private RadioButton radioButtonMasculino, radioButtonFeminino;
@@ -71,6 +86,34 @@ public class CadastroPessoaActivity extends AppCompatActivity {
         this.radioButtonFeminino = findViewById(R.id.radioButtonCadFeminino);
         this.progressBar = findViewById(R.id.progressBarCad_Usuario);
         this.scrollView = findViewById(R.id.scrollViewCad_Usuario);
+
+        this.imageButtonCamera = findViewById(R.id.imageButtonCameraCadastrar);
+        this.imageButtonGaleria = findViewById(R.id.imageButtonGaleriaCadastrar);
+
+        this.circleImageViewPerfil = findViewById(R.id.circleImageViewAddFotoPerfil);
+
+        imageButtonCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if(intent.resolveActivity(getPackageManager()) != null){
+                    startActivityForResult(intent, SELECAO_CAMERA);
+                }
+
+            }
+        });
+
+        imageButtonGaleria.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                if(intent.resolveActivity(getPackageManager()) != null){
+                    startActivityForResult(intent, SELECAO_GALERIA);
+                }
+            }
+        });
 
 
     }
@@ -218,5 +261,63 @@ public class CadastroPessoaActivity extends AppCompatActivity {
         Intent intent = new Intent(CadastroPessoaActivity.this, MainActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(resultCode == RESULT_OK){
+            Bitmap imagem = null;
+
+            try{
+
+                switch (requestCode){
+                    case SELECAO_CAMERA:
+                        imagem = (Bitmap) data.getExtras().get("data");
+                        break;
+                    case SELECAO_GALERIA:
+                        Uri localImagemSelecionada = data.getData();
+                        imagem = MediaStore.Images.Media.getBitmap(getContentResolver(), localImagemSelecionada);
+                        break;
+                }
+
+                if(imagem != null){
+                    circleImageViewPerfil.setImageBitmap(imagem);
+                }
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        for(int permissaoResultado : grantResults){
+            if(permissaoResultado == PackageManager.PERMISSION_DENIED){
+                alertaValidacaoPermissao();
+            }
+        }
+
+    }
+
+    private void alertaValidacaoPermissao(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Permissões Negadas");
+        builder.setMessage("Para utilizar o app é necessário aceitar as permissões");
+        builder.setCancelable(false);
+        builder.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }
