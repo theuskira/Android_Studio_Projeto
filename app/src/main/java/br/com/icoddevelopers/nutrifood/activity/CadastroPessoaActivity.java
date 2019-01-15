@@ -347,8 +347,8 @@ public class CadastroPessoaActivity extends AppCompatActivity {
                 //Salvar Imagem no Firebase
                 StorageReference imageRef = storageReference.child("imagens")
                         .child("perfil")
-                        .child(identificadorUsuario)
-                        .child("perfil.jpeg");
+                        //.child(identificadorUsuario)
+                        .child(identificadorUsuario + ".jpeg");
 
                 UploadTask uploadTask = imageRef.putBytes(dadosImagem);
                 uploadTask.addOnFailureListener(new OnFailureListener() {
