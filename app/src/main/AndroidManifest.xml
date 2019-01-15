@@ -53,7 +53,9 @@
         <activity
             android:name=".activity.CadastroPessoaActivity"
             android:parentActivityName=".activity.LoginActivity"/>
-        <activity android:name=".activity.EditarContaActivity"></activity>
+        <activity
+            android:name=".activity.EditarContaActivity"
+            android:parentActivityName=".activity.ContaActivity"/>
     </application>
 
 </manifest>

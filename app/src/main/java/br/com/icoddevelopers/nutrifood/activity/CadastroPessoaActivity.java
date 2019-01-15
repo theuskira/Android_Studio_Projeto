@@ -140,7 +140,7 @@ public class CadastroPessoaActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
                         if(task.isSuccessful()){
-                            Toast.makeText(getApplicationContext(), "Sucesso ao cadastrar " + usuario.getNome() + "!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "Bem vindo " + usuario.getNome() + "!", Toast.LENGTH_LONG).show();
                             chamarMain();
 
                             try{

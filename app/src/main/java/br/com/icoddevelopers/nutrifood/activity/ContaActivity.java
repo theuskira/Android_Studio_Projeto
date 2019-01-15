@@ -50,7 +50,7 @@ public class ContaActivity extends AppCompatActivity {
                     .load(url)
                     .into(circleImageViewPerfil);
         }else {
-            circleImageViewPerfil.setImageResource(R.drawable.balanca);
+            circleImageViewPerfil.setImageResource(R.drawable.apple);
         }
 
         verificarDados();
